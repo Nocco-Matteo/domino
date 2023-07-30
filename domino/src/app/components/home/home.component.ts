@@ -42,6 +42,10 @@ export class HomeComponent implements OnInit {
       y: spostataRect.top,
     };
   }
+  private init(): void {
+    this.popolaTessere();
+    this.tessereUtente = this.estraiSetteCarteCasuali();
+  }
 
   private popolaTessere(): void {
     for (let valore1 = 0; valore1 <= 6; valore1++) {
@@ -53,21 +57,9 @@ export class HomeComponent implements OnInit {
           uguali: !!(valore1 === valore2),
         };
         this.tessere.push(carta);
-
       }
     }
-    debugger
-  }
-  ordinaTessere(event: CdkDragDrop<any>): void {
-    moveItemInArray(
-      event.container.data,
-      event.previousIndex,
-      event.currentIndex
-    );
-  }
-  private init(): void {
-    this.popolaTessere();
-    this.tessereUtente = this.estraiSetteCarteCasuali();
+    debugger;
   }
 
   private estraiSetteCarteCasuali(): Tessera[] {

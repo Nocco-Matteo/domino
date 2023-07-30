@@ -5,14 +5,14 @@
   justify-content: center;
   width: 100%;
 }
-.parte-sinistra {
+.banco {
   width: 100%;
   border: 1px solid black;
   height: fit-content;
   max-height: 30vh;
 }
 
-.parte-destra {
+.utente {
   width: 100%;
   display: flex;
   flex-direction: column;

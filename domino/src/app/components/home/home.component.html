@@ -1,9 +1,9 @@
 <div class="board" cdkDropListGroup>
-    <div #parteSinistraDiv class="parte-sinistra" >
-      <app-tessere #bancoContent [tessere]="banco" cdkDropListSortingDisabled [isBanco]="true" cdkDropList [cdkDropListData]="banco" 
-      (cdkDropListDropped)="bancoContent.cartaRilasciata($event)"> </app-tessere>
-    </div>
-    <div class="parte-destra" >
-      <app-tessere [tessere]="tessereUtente" cdkDropList [cdkDropListData]="tessereUtente" (cdkDropListDropped)="ordinaTessere($event)"></app-tessere>
-    </div>
+  <div #parteSinistraDiv class="banco">
+    <app-tessere #bancoContent [tessere]="banco" cdkDropListSortingDisabled [isBanco]="true" cdkDropList
+      [cdkDropListData]="banco" (cdkDropListDropped)="bancoContent.cartaRilasciata($event)"> </app-tessere>
   </div>
+  <div class="utente">
+    <app-tessere [tessere]="tessereUtente" cdkDropList [cdkDropListData]="tessereUtente"></app-tessere>
+  </div>
+</div>

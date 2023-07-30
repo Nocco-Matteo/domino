@@ -2,12 +2,13 @@ import { Component, Input, OnInit } from '@angular/core';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Tessera } from 'src/app/models/models';
+import { AGGIUNTA_ANIMATION } from 'src/app/animations/animation';
 
 @Component({
   selector: 'app-tessere',
   templateUrl: './tessere.component.html',
   styleUrls: ['./tessere.component.scss'],
-  animations: [],
+  animations: [AGGIUNTA_ANIMATION],
 })
 export class TessereComponent implements OnInit {
   @Input() tessere!: Tessera[];
@@ -22,7 +23,7 @@ export class TessereComponent implements OnInit {
 
     const cartaTrascinataIndex = event.previousIndex;
     const cartaTrascinata: Tessera = event.item.data;
-    
+
     const estremoSinistro = this.tessere[0].parteSinistra;
     const estremoDestro = this.tessere[this.tessere.length - 1].parteDestra;
 
@@ -82,7 +83,7 @@ export class TessereComponent implements OnInit {
       );
       return;
     }
-    
+
     //TODO: non uguale
     console.log('nada');
   }

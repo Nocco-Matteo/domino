@@ -1,78 +1,109 @@
 .card-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    height: 30vh;
-  }
-  
-  .banco {
-    justify-content: center;
-    align-items: center;
-    padding: 5%;
-  
-    .carta {
-      padding: 0 !important;
-      max-height: 40px;
-      max-width: 80px;
-    }
-    .parte-sinistra,
-    .parte-destra {
-      max-height: 40px;
-      max-width: 40px;
-    }
-  }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: left;
+  height: 30vh;
+}
+
+.banco {
+  justify-content: center;
+  align-items: center;
+  padding: 5%;
+
   .carta {
-    border-radius: 50%;
-    cursor: move;
-    padding: 2%;
-    flex-basis: 20%;
-    display: flex;
+    flex-direction: row;
+    padding: 0 !important;
+    max-height: 40px;
+    max-width: 80px;
   }
-  
-  .parti-uguali {
-    flex-direction: column;
-    max-height: 80px !important;
-    max-width: 40px !important;
-  
-    .parte-sinistra {
-      border-top-right-radius: 10%;
-      border-bottom-left-radius: 0 !important;
-    }
-    .parte-destra {
-      border-top-right-radius: 0 !important;
-      border-bottom-left-radius: 10%;
-    }
-  }
-  
-  .colore-secondario {
-    background-color: grey !important;
-  }
-  
   .parte-sinistra,
   .parte-destra {
-    text-align: center;
-    background-color: ghostwhite;
-    border: 1px solid black;
-    height: 80px;
-    width: 80px;
+    max-height: 40px;
+    max-width: 40px;
   }
+
   .parte-sinistra {
-    border-top-left-radius: 10%;
     border-bottom-left-radius: 10%;
+    border-top-right-radius: 0!important;
   }
   .parte-destra {
+    border-bottom-left-radius: 0!important;
     border-top-right-radius: 10%;
-    border-bottom-right-radius: 10%;
   }
-  .cdk-drag-placeholder {
-    opacity: 0;
+}
+.carta {
+  border-radius: 50%;
+  cursor: move;
+  padding: 2%;
+  flex-basis: 33%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.parti-uguali {
+  flex-direction: column!important;
+  height: 80px !important;
+  max-height: none !important;
+  max-width: 40px !important;
+  .carta {
+    padding: 0 !important;
+    max-height: none !important;
+    max-width: none !important;
   }
-  
-  .cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  .parte-destra,
+  .parte-sinistra {
+    width: 40px !important;
   }
-  
-  .card-wrapper .cdk-drop-list-dragging .carta:not(.cdk-drag-placeholder) {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  .parte-sinistra {
+    border-top-right-radius: 10%!important;
+    border-bottom-left-radius: 0 !important;
   }
-  
+  .parte-destra {
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 10%!important;
+  }
+}
+
+.colore-secondario {
+  background-color: grey !important;
+}
+
+.parte-sinistra,
+.parte-destra {
+  text-align: center;
+  background-color: ghostwhite;
+  border: 1px solid black;
+  height: 60px;
+  width: 50%;
+}
+.parte-sinistra {
+  border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+}
+.parte-destra {
+  border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+}
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.card-wrapper .cdk-drop-list-dragging .carta:not(.cdk-drag-placeholder) {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+@media screen and (min-width: 600px) {
+  .carta {
+    flex-basis: 25%;
+  }
+  @media screen and (min-width: 1000px) {
+    .carta {
+      flex-basis: 14.2%;
+    }
+  }
+}
