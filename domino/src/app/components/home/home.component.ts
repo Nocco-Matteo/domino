@@ -1,6 +1,7 @@
 import {
   CdkDrag,
   CdkDragDrop,
+  moveItemInArray,
   transferArrayItem,
 } from '@angular/cdk/drag-drop';
 import {
@@ -23,11 +24,12 @@ export class HomeComponent implements OnInit {
   private conta: number = 0;
 
   tessere: Tessera[] = [];
-  carteUtente: Tessera[] = [];
+  
+  tessereUtente: Tessera[] = [];
   banco: Tessera[] = [];
 
   constructor(private elementRef: ElementRef) {}
-  
+
   ngOnInit(): void {
     this.init();
   }
@@ -48,7 +50,7 @@ export class HomeComponent implements OnInit {
           parteSinistra: valore1,
           parteDestra: valore2,
           invertita: !!(Math.floor(Math.random() * 100) % 2 == 0),
-          uguali : !!(valore1===valore2)
+          uguali: !!(valore1 === valore2),
         };
         this.tessere.push(carta);
 
@@ -58,17 +60,23 @@ export class HomeComponent implements OnInit {
             parteSinistra: valore2,
             parteDestra: valore1,
             invertita: !!(Math.floor(Math.random() * 100) % 2 == 0),
-            uguali : !!(valore1===valore2)
+            uguali: !!(valore1 === valore2),
           };
           this.tessere.push(cartaInversa);
         }
       }
     }
   }
-
+  ordinaTessere(event: CdkDragDrop<any>): void {
+    moveItemInArray(
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+  }
   private init(): void {
     this.popolaTessere();
-    this.carteUtente = this.estraiSetteCarteCasuali();
+    this.tessereUtente = this.estraiSetteCarteCasuali();
   }
 
   private estraiSetteCarteCasuali(): Tessera[] {

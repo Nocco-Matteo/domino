@@ -4,6 +4,6 @@
       (cdkDropListDropped)="bancoContent.cartaRilasciata($event)"> </app-tessere>
     </div>
     <div class="parte-destra" >
-      <app-tessere [tessere]="carteUtente" cdkDropList [cdkDropListData]="carteUtente"></app-tessere>
+      <app-tessere [tessere]="tessereUtente" cdkDropList [cdkDropListData]="tessereUtente" (cdkDropListDropped)="ordinaTessere($event)"></app-tessere>
     </div>
   </div>
