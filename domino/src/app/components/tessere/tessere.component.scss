@@ -1,0 +1,78 @@
+.card-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    height: 30vh;
+  }
+  
+  .banco {
+    justify-content: center;
+    align-items: center;
+    padding: 5%;
+  
+    .carta {
+      padding: 0 !important;
+      max-height: 40px;
+      max-width: 80px;
+    }
+    .parte-sinistra,
+    .parte-destra {
+      max-height: 40px;
+      max-width: 40px;
+    }
+  }
+  .carta {
+    border-radius: 50%;
+    cursor: move;
+    padding: 2%;
+    flex-basis: 33%;
+    display: flex;
+  }
+  
+  .parti-uguali {
+    flex-direction: column;
+    max-height: 80px !important;
+    max-width: 40px !important;
+  
+    .parte-sinistra {
+      border-top-right-radius: 10%;
+      border-bottom-left-radius: 0 !important;
+    }
+    .parte-destra {
+      border-top-right-radius: 0 !important;
+      border-bottom-left-radius: 10%;
+    }
+  }
+  
+  .colore-secondario {
+    background-color: grey !important;
+  }
+  
+  .parte-sinistra,
+  .parte-destra {
+    text-align: center;
+    background-color: ghostwhite;
+    border: 1px solid black;
+    height: 80px;
+    width: 80px;
+  }
+  .parte-sinistra {
+    border-top-left-radius: 10%;
+    border-bottom-left-radius: 10%;
+  }
+  .parte-destra {
+    border-top-right-radius: 10%;
+    border-bottom-right-radius: 10%;
+  }
+  .cdk-drag-placeholder {
+    opacity: 0;
+  }
+  
+  .cdk-drag-animating {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  
+  .card-wrapper .cdk-drop-list-dragging .carta:not(.cdk-drag-placeholder) {
+    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+  }
+  

@@ -1,0 +1,13 @@
+<div class="card-wrapper" [ngClass]="isBanco? 'banco':null">
+    <div #cartaContainer *ngFor="let tessera of tessere" class="carta" [cdkDragDisabled]="isBanco" cdkDrag
+      [cdkDragPreviewClass]="'carta'" [cdkDragData]="tessera" cdkDragBoundary="board"
+      [ngClass]="(tessera.uguali&&isBanco)? 'parti-uguali':null">
+      <div class="parte-sinistra" [ngClass]="tessera.invertita?'colore-secondario':null">
+        {{ tessera.parteSinistra }}
+      </div>
+      <div class="parte-destra" [ngClass]="!tessera.invertita? 'colore-secondario':null">
+        {{ tessera.parteDestra }}
+      </div>
+    </div>
+  </div>
+  
