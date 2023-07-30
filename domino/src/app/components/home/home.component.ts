@@ -27,6 +27,7 @@ export class HomeComponent implements OnInit {
   banco: Tessera[] = [];
 
   constructor(private elementRef: ElementRef) {}
+  
   ngOnInit(): void {
     this.init();
   }
