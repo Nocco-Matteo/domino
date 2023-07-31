@@ -1,19 +1,9 @@
-import {
-  CdkDrag,
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-} from '@angular/cdk/drag-drop';
-import {
-  AfterViewInit,
-  Component,
-  ElementRef,
-  OnInit,
-  QueryList,
-  ViewChild,
-  ViewChildren,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Tessera } from 'src/app/models/models';
+import { PartitaService } from 'src/app/services/partita.service';
+import { GrowlComponent } from '../growl/growl.component';
+import { TessereComponent } from '../tessere/tessere.component';
 
 @Component({
   selector: 'app-home',
@@ -25,60 +15,45 @@ export class HomeComponent implements OnInit {
 
   tessere: Tessera[] = [];
 
+  tessereBot: Tessera[] = [];
+  tessereBanco: Tessera[] = [];
   tessereUtente: Tessera[] = [];
-  banco: Tessera[] = [];
 
-  constructor(private elementRef: ElementRef) {}
+  modale?: MatDialogRef<any>;
+
+  @ViewChild('bancoComponent', { static: true })
+  bancoComponent!: TessereComponent;
+
+  constructor(
+    private readonly dialog: MatDialog,
+    private readonly partitaService: PartitaService
+  ) {}
 
   ngOnInit(): void {
-    this.init();
+    this.initPartita();
   }
 
-  cartaSpostata(event: any, carta: any) {
-    const spostataElement = event.source.element.nativeElement;
-    const spostataRect = spostataElement.getBoundingClientRect();
-    const posizioneSpostata = {
-      x: spostataRect.left,
-      y: spostataRect.top,
-    };
-  }
-  private init(): void {
-    this.popolaTessere();
-    this.tessereUtente = this.estraiSetteCarteCasuali();
+  mostraGrowl(messaggio: string) {
+    this.dialog.open(GrowlComponent, {
+      data: { messaggio: messaggio }, // Passa il testo alla dialog utilizzando l'opzione 'data'
+    });
   }
 
-  private popolaTessere(): void {
-    for (let valore1 = 0; valore1 <= 6; valore1++) {
-      for (let valore2 = valore1; valore2 <= 6; valore2++) {
-        const carta: Tessera = {
-          parteSinistra: valore1,
-          parteDestra: valore2,
-          invertita: !!(Math.floor(Math.random() * 100) % 2 == 0),
-          uguali: !!(valore1 === valore2),
-        };
-        this.tessere.push(carta);
-      }
-    }
-    debugger;
+  nuovoTurnoBot(): void {
+    setTimeout(() => {
+      this.partitaService.turnoBot();
+    }, 1000);
   }
 
-  private estraiSetteCarteCasuali(): Tessera[] {
-    const mazzoTemporaneo = [...this.tessere];
+  private initPartita() {
+    const { tessereUtente, tessereBanco, tessereBot } =
+      this.partitaService.initTessere();
 
-    const setteCarteCasuali: Tessera[] = [];
+    this.tessereUtente = tessereUtente;
+    this.tessereBanco = tessereBanco;
+    this.tessereBot = tessereBot;
 
-    for (let i = 0; i < 8; i++) {
-      const indiceCasuale = Math.floor(Math.random() * mazzoTemporaneo.length);
-
-      const cartaCasuale = mazzoTemporaneo.splice(indiceCasuale, 1)[0];
-      if (i == 7) {
-        //prendi una tessera iniziale
-        this.banco.push(cartaCasuale);
-      } else {
-        setteCarteCasuali.push(cartaCasuale);
-      }
-    }
-
-    return setteCarteCasuali;
+    const condizioneFinePartita =
+      this.tessereUtente.length == 0 || this.tessereBot.length == 0;
   }
 }

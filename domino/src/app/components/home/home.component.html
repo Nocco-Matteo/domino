@@ -1,7 +1,11 @@
 <div class="board" cdkDropListGroup>
+  <div class="bot">
+    <app-tessere [isBot]="true" [tessere]="tessereBot" cdkDropList [cdkDropListData]="tessereBot"></app-tessere>
+  </div>
   <div #parteSinistraDiv class="banco">
-    <app-tessere #bancoContent [tessere]="banco" cdkDropListSortingDisabled [isBanco]="true" cdkDropList
-      [cdkDropListData]="banco" (cdkDropListDropped)="bancoContent.cartaRilasciata($event)"> </app-tessere>
+    <app-tessere #bancoComponent (nuovoTurnoBot)="nuovoTurnoBot()" (emettiGrowl)="mostraGrowl($event)" #bancoContent
+      [tessere]="tessereBanco" cdkDropListSortingDisabled [isBanco]="true" cdkDropList [cdkDropListData]="tessereBanco"
+      (cdkDropListDropped)="bancoContent.cartaRilasciata($event)"> </app-tessere>
   </div>
   <div class="utente">
     <app-tessere [tessere]="tessereUtente" cdkDropList [cdkDropListData]="tessereUtente"></app-tessere>

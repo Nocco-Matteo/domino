@@ -8,12 +8,15 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HomeComponent } from './components/home/home.component';
 import { TessereComponent } from './components/tessere/tessere.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import { GrowlComponent } from './components/growl/growl.component';
+import { MatCardModule } from '@angular/material/card';
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    TessereComponent
+    TessereComponent,
+    GrowlComponent
   ],
   imports: [
     BrowserModule,
@@ -21,7 +24,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     NgbModule,
     BrowserAnimationsModule,
     DragDropModule,
-    
+    MatCardModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

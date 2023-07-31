@@ -1,8 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { Tessera } from 'src/app/models/models';
 import { AGGIUNTA_ANIMATION } from 'src/app/animations/animation';
+import { PartitaService } from 'src/app/services/partita.service';
 
 @Component({
   selector: 'app-tessere',
@@ -11,53 +12,42 @@ import { AGGIUNTA_ANIMATION } from 'src/app/animations/animation';
   animations: [AGGIUNTA_ANIMATION],
 })
 export class TessereComponent implements OnInit {
-  @Input() tessere!: Tessera[];
+  @Input() isBot: boolean = false;
   @Input() isBanco: boolean = false;
+  @Input() tessere!: Tessera[];
 
+  @Output() nuovoTurnoBot: EventEmitter<void> = new EventEmitter<void>();
+  @Output() emettiGrowl: EventEmitter<string> = new EventEmitter<string>();
+
+  constructor(private readonly partitaService: PartitaService) {}
   ngOnInit(): void {
     this.init();
   }
 
-  cartaRilasciata(event: CdkDragDrop<any>) {
+  cartaRilasciata(event: CdkDragDrop<any>): void {
     const tessereUtente = event.previousContainer.data;
 
     const cartaTrascinataIndex = event.previousIndex;
     const cartaTrascinata: Tessera = event.item.data;
 
-    const estremoSinistro = this.tessere[0].parteSinistra;
-    const estremoDestro = this.tessere[this.tessere.length - 1].parteDestra;
-
-    let isInEstremoSinistro = false;
-    let isInEstremoDestro = false;
-
-    switch (estremoSinistro) {
-      case cartaTrascinata.parteSinistra:
-        isInEstremoSinistro = true;
-
-        //inversione tessera
-        cartaTrascinata.parteSinistra = cartaTrascinata.parteDestra;
-        cartaTrascinata.parteDestra = estremoSinistro;
-        cartaTrascinata.invertita = !cartaTrascinata.invertita;
-        break;
-      case cartaTrascinata.parteDestra:
-        isInEstremoSinistro = true;
-        break;
-    }
-    switch (estremoDestro) {
-      case cartaTrascinata.parteSinistra:
-        isInEstremoDestro = true;
-        break;
-
-      case cartaTrascinata.parteDestra:
-        isInEstremoDestro = true;
-
-        //inversione tessera
-        cartaTrascinata.parteDestra = cartaTrascinata.parteSinistra;
-        cartaTrascinata.parteSinistra = estremoDestro;
-        cartaTrascinata.invertita = !cartaTrascinata.invertita;
-        break;
+    //primo turno
+    if (this.tessere.length === 0) {
+      transferArrayItem(
+        tessereUtente, //tessere dell'utente
+        this.tessere, //tessere del banco
+        cartaTrascinataIndex, //indice nelle tessere dell'utente
+        0 //indice in cui metterlo
+      );
+      this.nuovoTurnoBot.emit();
+      return;
     }
 
+    const { isInEstremoSinistro, isInEstremoDestro } = this.partitaService.cercaCorrispondenza(
+      cartaTrascinata,
+      this.tessere
+    );
+
+    debugger
     //se è uguale sia a destra che sinistra
     if (isInEstremoDestro && isInEstremoSinistro) {
       //TODO: scelta se a destra o sinistra
@@ -71,6 +61,7 @@ export class TessereComponent implements OnInit {
         cartaTrascinataIndex, //indice nelle tessere dell'utente
         this.tessere.length //indice in cui metterlo
       );
+      this.nuovoTurnoBot.emit();
       return;
     }
     //se è uguale a sinistra
@@ -81,11 +72,12 @@ export class TessereComponent implements OnInit {
         cartaTrascinataIndex, //indice nelle tessere dell'utente
         0 //indice in cui metterlo
       );
+      this.nuovoTurnoBot.emit();
       return;
     }
 
-    //TODO: non uguale
-    console.log('nada');
+    //non uguale
+    this.emettiGrowl.emit('Casella non corrispondente');
   }
 
   private init(): void {}
