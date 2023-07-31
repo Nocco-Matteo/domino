@@ -24,10 +24,10 @@
 
   .parte-sinistra {
     border-bottom-left-radius: 10%;
-    border-top-right-radius: 0!important;
+    border-top-right-radius: 0 !important;
   }
   .parte-destra {
-    border-bottom-left-radius: 0!important;
+    border-bottom-left-radius: 0 !important;
     border-top-right-radius: 10%;
   }
 }
@@ -42,7 +42,7 @@
 }
 
 .parti-uguali {
-  flex-direction: column!important;
+  flex-direction: column !important;
   height: 80px !important;
   max-height: none !important;
   max-width: 40px !important;
@@ -56,19 +56,19 @@
     width: 40px !important;
   }
   .parte-sinistra {
-    border-top-right-radius: 10%!important;
+    border-top-right-radius: 10% !important;
     border-bottom-left-radius: 0 !important;
   }
   .parte-destra {
     border-top-right-radius: 0 !important;
-    border-bottom-left-radius: 10%!important;
+    border-bottom-left-radius: 10% !important;
   }
 }
 
-.bot{
-    .carta{
-        cursor: default!important;
-    }
+.bot {
+  .carta {
+    cursor: default !important;
+  }
 }
 .colore-secondario {
   background-color: grey !important;
@@ -101,4 +101,3 @@
 .card-wrapper .cdk-drop-list-dragging .carta:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-

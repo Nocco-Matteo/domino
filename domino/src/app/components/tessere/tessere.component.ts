@@ -1,8 +1,7 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { trigger, transition, style, animate } from '@angular/animations';
-import { Tessera } from 'src/app/models/models';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { AGGIUNTA_ANIMATION } from 'src/app/animations/animation';
+import { Tessera } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
 
 @Component({
@@ -12,7 +11,7 @@ import { PartitaService } from 'src/app/services/partita.service';
   animations: [AGGIUNTA_ANIMATION],
 })
 export class TessereComponent implements OnInit {
-  @Input() isDragDisabled : boolean = false;
+  @Input() isDragDisabled: boolean = false;
   @Input() isBot: boolean = false;
   @Input() isBanco: boolean = false;
   @Input() tessere!: Tessera[];
@@ -43,12 +42,9 @@ export class TessereComponent implements OnInit {
       return;
     }
 
-    const { isInEstremoSinistro, isInEstremoDestro } = this.partitaService.cercaCorrispondenza(
-      cartaTrascinata,
-      this.tessere
-    );
+    const { isInEstremoSinistro, isInEstremoDestro } =
+      this.partitaService.cercaCorrispondenza(cartaTrascinata, this.tessere);
 
-    debugger
     //se è uguale sia a destra che sinistra
     if (isInEstremoDestro && isInEstremoSinistro) {
       //TODO: scelta se a destra o sinistra

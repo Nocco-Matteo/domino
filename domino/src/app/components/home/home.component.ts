@@ -1,9 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Tessera } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
 import { GrowlComponent } from '../growl/growl.component';
-import { TessereComponent } from '../tessere/tessere.component';
 
 @Component({
   selector: 'app-home',
@@ -13,7 +12,7 @@ import { TessereComponent } from '../tessere/tessere.component';
 export class HomeComponent implements OnInit {
   private conta: number = 0;
 
-  isTurnoBot : boolean = false;
+  isTurnoBot: boolean = false;
 
   tessere: Tessera[] = [];
 
@@ -22,9 +21,6 @@ export class HomeComponent implements OnInit {
   tessereUtente: Tessera[] = [];
 
   modale?: MatDialogRef<any>;
-
-  @ViewChild('bancoComponent', { static: true })
-  bancoComponent!: TessereComponent;
 
   constructor(
     private readonly dialog: MatDialog,
@@ -42,10 +38,10 @@ export class HomeComponent implements OnInit {
   }
 
   nuovoTurnoBot(): void {
-    this.isTurnoBot = true
+    this.isTurnoBot = true;
     setTimeout(() => {
       this.partitaService.turnoBot();
-      this.isTurnoBot = false
+      this.isTurnoBot = false;
     }, 1500);
   }
 

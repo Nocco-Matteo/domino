@@ -80,7 +80,7 @@ export class PartitaService {
           x, //indice nelle tessere dell'utente
           this.tessere.length //indice in cui metterlo
         );
-        debugger;
+        ;
 
         return;
       }
@@ -92,13 +92,13 @@ export class PartitaService {
           x, //indice nelle tessere dell'utente
           0 //indice in cui metterlo
         );
-        debugger;
+        ;
 
         return;
       }
     }
 
-    debugger;
+    ;
   }
 
   get turno() {

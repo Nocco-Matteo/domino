@@ -9,8 +9,7 @@ import { GROWL_ANIMATION } from 'src/app/animations/animation';
   animations: [GROWL_ANIMATION],
 })
 export class GrowlComponent implements OnInit {
-
   constructor(@Inject(MAT_DIALOG_DATA) public data: any) {}
-  
+
   ngOnInit(): void {}
 }

@@ -1,7 +1,7 @@
 <div class="card-wrapper" [ngClass]="isBanco? 'banco': isBot||isDragDisabled? 'bot':null">
   <div #cartaContainer [@entryAnimation] *ngFor="let tessera of tessere" class="carta" [cdkDragDisabled]="isBanco"
-    cdkDrag [cdkDragDisabled]="isDragDisabled" [cdkDragPreviewClass]="'carta'" [cdkDragData]="tessera" cdkDragBoundary="board"
-    [ngClass]="(tessera.uguali&&isBanco)? 'parti-uguali':null">
+    cdkDrag [cdkDragDisabled]="isDragDisabled" [cdkDragPreviewClass]="'carta'" [cdkDragData]="tessera"
+    cdkDragBoundary="board" [ngClass]="(tessera.uguali&&isBanco)? 'parti-uguali':null">
     <div class="parte-sinistra" [ngClass]="tessera.invertita?'colore-secondario':null">
       {{ tessera.parteSinistra }}
     </div>
