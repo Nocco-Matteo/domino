@@ -13,6 +13,8 @@ import { TessereComponent } from '../tessere/tessere.component';
 export class HomeComponent implements OnInit {
   private conta: number = 0;
 
+  isTurnoBot : boolean = false;
+
   tessere: Tessera[] = [];
 
   tessereBot: Tessera[] = [];
@@ -40,9 +42,11 @@ export class HomeComponent implements OnInit {
   }
 
   nuovoTurnoBot(): void {
+    this.isTurnoBot = true
     setTimeout(() => {
       this.partitaService.turnoBot();
-    }, 1000);
+      this.isTurnoBot = false
+    }, 1500);
   }
 
   private initPartita() {

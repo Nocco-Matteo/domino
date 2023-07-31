@@ -12,6 +12,7 @@ import { PartitaService } from 'src/app/services/partita.service';
   animations: [AGGIUNTA_ANIMATION],
 })
 export class TessereComponent implements OnInit {
+  @Input() isDragDisabled : boolean = false;
   @Input() isBot: boolean = false;
   @Input() isBanco: boolean = false;
   @Input() tessere!: Tessera[];

@@ -1,6 +1,6 @@
 <div class="board" cdkDropListGroup>
   <div class="bot">
-    <app-tessere [isBot]="true" [tessere]="tessereBot" cdkDropList [cdkDropListData]="tessereBot"></app-tessere>
+    <app-tessere [isDragDisabled]="true" [isBot]="true" [tessere]="tessereBot" cdkDropList [cdkDropListData]="tessereBot"></app-tessere>
   </div>
   <div #parteSinistraDiv class="banco">
     <app-tessere #bancoComponent (nuovoTurnoBot)="nuovoTurnoBot()" (emettiGrowl)="mostraGrowl($event)" #bancoContent
@@ -8,6 +8,6 @@
       (cdkDropListDropped)="bancoContent.cartaRilasciata($event)"> </app-tessere>
   </div>
   <div class="utente">
-    <app-tessere [tessere]="tessereUtente" cdkDropList [cdkDropListData]="tessereUtente"></app-tessere>
+    <app-tessere [isDragDisabled]="isTurnoBot" [tessere]="tessereUtente" cdkDropList [cdkDropListData]="tessereUtente"></app-tessere>
   </div>
 </div>
