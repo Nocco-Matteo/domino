@@ -10,8 +10,6 @@ import { GrowlComponent } from '../growl/growl.component';
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  private conta: number = 0;
-
   isTurnoBot: boolean = false;
 
   tessere: Tessera[] = [];
@@ -45,16 +43,18 @@ export class HomeComponent implements OnInit {
     }, 1500);
   }
 
+  pescaUnaTessera(): void {
+    this.partitaService.pescaUnaTessera(false);
+    this.nuovoTurnoBot();
+  }
+
   private initPartita() {
-    const { tessereUtente, tessereBanco, tessereBot , tessere} =
+    const { tessereUtente, tessereBanco, tessereBot, tessere } =
       this.partitaService.initTessere();
 
     this.tessereUtente = tessereUtente;
     this.tessereBanco = tessereBanco;
     this.tessereBot = tessereBot;
-    this.tessere = tessere
-
-    const condizioneFinePartita =
-      this.tessereUtente.length == 0 || this.tessereBot.length == 0;
+    this.tessere = tessere;
   }
 }

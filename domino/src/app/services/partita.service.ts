@@ -63,6 +63,7 @@ export class PartitaService {
 
   turnoBot() {
     this._turno++;
+    
     for (let x = 0; x < this.tessereBot.length; x++) {
       const { isInEstremoSinistro, isInEstremoDestro } =
         this.cercaCorrispondenza(this.tessereBot[x], this.tessereBanco);
@@ -98,7 +99,7 @@ export class PartitaService {
       }
     }
 
-    ;
+    this.pescaUnaTessera(true);
   }
 
   get turno() {
@@ -141,5 +142,24 @@ export class PartitaService {
     }
 
     return { isInEstremoSinistro, isInEstremoDestro };
+  }
+
+  pescaUnaTessera(isBot : boolean) : void{
+    if(isBot){
+      transferArrayItem(
+      this.tessere, //tessere dell'utente
+      this.tessereBot, //tessere del banco
+      0, //indice nelle tessere dell'utente
+      this.tessereBot.length //indice in cui metterlo
+    );
+    return;
+    }
+    
+    transferArrayItem(
+      this.tessere, //tessere dell'utente
+      this.tessereUtente, //tessere del banco
+      0, //indice nelle tessere dell'utente
+      this.tessereUtente.length //indice in cui metterlo
+    );
   }
 }
