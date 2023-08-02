@@ -33,15 +33,14 @@ export class PartitaService {
   }
 
   private estraiSetteTessereCasuali(): Tessera[] {
-    const mazzoTemporaneo = [...this.tessere];
 
     const setteCarteCasuali: Tessera[] = [];
-    const tessere = 7;
+    const numeroTessere = 7;
 
-    for (let i = 0; i < tessere; i++) {
-      const indiceCasuale = Math.floor(Math.random() * mazzoTemporaneo.length);
+    for (let i = 0; i < numeroTessere; i++) {
+      const indiceCasuale = Math.floor(Math.random() * this.tessere.length);
 
-      const cartaCasuale = mazzoTemporaneo.splice(indiceCasuale, 1)[0];
+      const cartaCasuale = this.tessere.splice(indiceCasuale, 1)[0];
 
       setteCarteCasuali.push(cartaCasuale);
     }
@@ -58,6 +57,7 @@ export class PartitaService {
       tessereUtente: this.tessereUtente,
       tessereBanco: this.tessereBanco,
       tessereBot: this.tessereBot,
+      tessere: this.tessere
     };
   }
 

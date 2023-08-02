@@ -1,20 +1,28 @@
 .card-wrapper {
   display: flex;
-  flex-wrap: wrap;
-  justify-content: left;
-  height: 30vh;
-}
-
-.banco {
   justify-content: center;
   align-items: center;
-  padding: 5%;
+  height: 30vh;
+  padding: 10px 0;
+}
+.banco {
+  width: 80%;
+  height: 35vh;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../../assets/imgs/tavoloBackground2.jpg");
+  background-size: contain;
+  // background-color: green; /* Colore per la superficie del tavolo */
+  border: 10px solid brown; /* Bordo per il tavolo */
+  border-radius: 10px; /* Rendi i bordi del tavolo arrotondati */
 
   .carta {
     flex-direction: row;
     padding: 0 !important;
     max-height: 40px;
     max-width: 80px;
+    margin-left: 0 !important;
   }
   .parte-sinistra,
   .parte-destra {
@@ -32,15 +40,19 @@
   }
 }
 .carta {
+  
   border-radius: 50%;
   cursor: move;
-  padding: 20px 0;
-  flex-basis: 14.2%;
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 120px;
+  height: 100%;
+  margin-left: -35px!important;
 }
-
+.prima {
+  margin-left: 0 !important;
+}
 .parti-uguali {
   flex-direction: column !important;
   height: 80px !important;
@@ -66,6 +78,7 @@
 }
 
 .bot {
+  height: 25vh;
   .carta {
     cursor: default !important;
   }
@@ -79,8 +92,8 @@
   text-align: center;
   background-color: ghostwhite;
   border: 1px solid black;
-  height: 60px;
-  width: 50%;
+  height: 100%;
+  width: 100%;
 }
 .parte-sinistra {
   border-top-left-radius: 10%;
@@ -100,4 +113,10 @@
 
 .card-wrapper .cdk-drop-list-dragging .carta:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+.nonBot{
+  .carta:hover{
+  transform:scale(1.03) translateY(-10px) ;
+  transition: transform 200ms ease-out;
+}
 }

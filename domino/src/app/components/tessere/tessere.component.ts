@@ -76,6 +76,6 @@ export class TessereComponent implements OnInit {
     //non uguale
     this.emettiGrowl.emit('Casella non corrispondente');
   }
-
+  
   private init(): void {}
 }

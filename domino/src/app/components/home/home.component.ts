@@ -46,12 +46,13 @@ export class HomeComponent implements OnInit {
   }
 
   private initPartita() {
-    const { tessereUtente, tessereBanco, tessereBot } =
+    const { tessereUtente, tessereBanco, tessereBot , tessere} =
       this.partitaService.initTessere();
 
     this.tessereUtente = tessereUtente;
     this.tessereBanco = tessereBanco;
     this.tessereBot = tessereBot;
+    this.tessere = tessere
 
     const condizioneFinePartita =
       this.tessereUtente.length == 0 || this.tessereBot.length == 0;
