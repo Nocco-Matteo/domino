@@ -13,9 +13,8 @@
   align-items: center;
   background-image: url("../../../assets/imgs/tavoloBackground2.jpg");
   background-size: contain;
-  // background-color: green; /* Colore per la superficie del tavolo */
-  border: 10px solid brown; /* Bordo per il tavolo */
-  border-radius: 10px; /* Rendi i bordi del tavolo arrotondati */
+  border: 10px solid brown; 
+  border-radius: 10px; 
 
   .carta {
     flex-direction: row;
@@ -40,7 +39,6 @@
   }
 }
 .carta {
-  
   border-radius: 50%;
   cursor: move;
   display: flex;
@@ -48,7 +46,7 @@
   flex-direction: column;
   width: 120px;
   height: 100%;
-  margin-left: -35px!important;
+    margin-left: -35px !important;
 }
 .prima {
   margin-left: 0 !important;
@@ -114,9 +112,9 @@
 .card-wrapper .cdk-drop-list-dragging .carta:not(.cdk-drag-placeholder) {
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
-.nonBot{
-  .carta:hover{
-  transform:scale(1.03) translateY(-10px) ;
-  transition: transform 200ms ease-out;
-}
+.nonBot {
+  .carta:hover {
+    transform: scale(1.03) translateY(-10px);
+    transition: transform 200ms ease-out;
+  }
 }

@@ -1,4 +1,4 @@
-<div class="card-wrapper" [ngClass]="isBanco? 'banco': isBot||isDragDisabled? 'bot':'nonBot'">
+<div class="card-wrapper" [ngClass]="isBanco? 'banco': isBot? 'bot':'nonBot'">
   <div #cartaContainer *ngFor="let tessera of tessere;index as i" class="carta" cdkDrag cdkDragBoundary="board" [@entryAnimation]
     [cdkDragDisabled]="isBanco" [cdkDragDisabled]="isDragDisabled" [cdkDragPreviewClass]="'carta'"
     [cdkDragData]="tessera" [ngClass]="[(tessera.uguali&&isBanco)? 'parti-uguali':'',i===0?' prima':'']">
