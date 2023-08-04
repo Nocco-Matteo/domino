@@ -1,13 +1,44 @@
-<div class="card-wrapper" [ngClass]="isBanco? 'banco': isBot? 'bot':'nonBot'">
-  <div #cartaContainer *ngFor="let tessera of tessere;index as i" class="carta" cdkDrag cdkDragBoundary="board" [@entryAnimation]
+<div class="card-wrapper" [ngClass]="isBanco? 'banco': isBot? 'bot': isUtilities? 'utilities':'nonBot'">
+  <ng-container *ngIf="!isUtilities; else Utilities">
+    <div #cartaContainer *ngFor="let tessera of tessere;index as i" class="carta" cdkDrag cdkDragBoundary="board" [@entryAnimation]
     [cdkDragDisabled]="isBanco" [cdkDragDisabled]="isDragDisabled" [cdkDragPreviewClass]="'carta'"
     [cdkDragData]="tessera" [ngClass]="[(tessera.uguali&&isBanco)? 'parti-uguali':'',i===0?' prima':'']">
 
-    <div class="parte-sinistra" [ngClass]="tessera.invertita?'colore-secondario':null">
-      {{ tessera.parteSinistra }}
-    </div>
-    <div class="parte-destra" [ngClass]="!tessera.invertita? 'colore-secondario':null">
-      {{ tessera.parteDestra }}
-    </div>
+    <ng-container *ngIf="isBot||isUtilities;else fronteTessera">
+      <div class="retro-carta">
+        
+      </div>
+    </ng-container>
+    <ng-template #fronteTessera>
+      <div class="parte-sinistra" [ngClass]="tessera.invertita?'colore-secondario':null">
+        {{ tessera.parteSinistra }}
+      </div>
+      <div class="parte-destra" [ngClass]="!tessera.invertita? 'colore-secondario':null">
+        {{ tessera.parteDestra }}
+      </div>
+    </ng-template>
   </div>
+  </ng-container>
+  <ng-template #Utilities>
+    <div #cartaContainer *ngFor="let tessera of tessere.reverse();index as i" class="carta" cdkDrag cdkDragBoundary="board" [@entryAnimation] [@leaveAnimation]
+    [cdkDragDisabled]="isBanco" [cdkDragDisabled]="isDragDisabled" [cdkDragPreviewClass]="'carta'"
+    [cdkDragData]="tessera" [ngClass]="[(tessera.uguali&&isBanco)? 'parti-uguali':'',i===0?' prima':'']">
+
+    <ng-container *ngIf="isBot||isUtilities;else fronteTessera">
+      <div class="retro-carta">
+        
+      </div>
+    </ng-container>
+    <ng-template #fronteTessera>
+      <div class="parte-sinistra" [ngClass]="tessera.invertita?'colore-secondario':null">
+        {{ tessera.parteSinistra }}
+      </div>
+      <div class="parte-destra" [ngClass]="!tessera.invertita? 'colore-secondario':null">
+        {{ tessera.parteDestra }}
+      </div>
+    </ng-template>
+  </div>
+  </ng-template>
+  
+  
 </div>

@@ -1,42 +1,12 @@
+$margine-tessere-utilities: 60px;
+
 .card-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 30vh;
+  height: 25vh;
   padding: 10px 0;
-}
-.banco {
-  width: 80%;
-  height: 35vh;
-  margin: 0 auto;
-  justify-content: center;
-  align-items: center;
-  background-image: url("../../../assets/imgs/tavoloBackground2.jpg");
-  background-size: contain;
-  border: 10px solid brown; 
-  border-radius: 10px; 
-
-  .carta {
-    flex-direction: row;
-    padding: 0 !important;
-    max-height: 40px;
-    max-width: 80px;
-    margin-left: 0 !important;
-  }
-  .parte-sinistra,
-  .parte-destra {
-    max-height: 40px;
-    max-width: 40px;
-  }
-
-  .parte-sinistra {
-    border-bottom-left-radius: 10%;
-    border-top-right-radius: 0 !important;
-  }
-  .parte-destra {
-    border-bottom-left-radius: 0 !important;
-    border-top-right-radius: 10%;
-  }
+  
 }
 .carta {
   border-radius: 50%;
@@ -48,6 +18,40 @@
   height: 100%;
     margin-left: -35px !important;
 }
+.banco {
+  width: 80%;
+  height: 50vh;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../../../assets/imgs/tavoloBackground2.jpg");
+  background-size: contain;
+  border: 10px solid brown; 
+  border-radius: 10px; 
+
+  .carta {
+    flex-direction: row;
+    padding: 0 !important;
+    max-width: 80px;
+    margin-left: 0 !important;
+  }
+  .parte-sinistra,
+  .parte-destra {
+    max-height: 50px;
+    max-width: 50px;
+  }
+
+  .parte-sinistra {
+    border-bottom-left-radius: 10%;
+    border-top-right-radius: 0 !important;
+  }
+  .parte-destra {
+    border-bottom-left-radius: 0 !important;
+    border-top-right-radius: 10%;
+  }
+}
+
+
 .prima {
   margin-left: 0 !important;
 }
@@ -56,6 +60,7 @@
   height: 80px !important;
   max-height: none !important;
   max-width: 40px !important;
+
   .carta {
     padding: 0 !important;
     max-height: none !important;
@@ -74,7 +79,22 @@
     border-bottom-left-radius: 10% !important;
   }
 }
+.utilities{
+  flex-direction: column;
+  justify-content: start;
+  // padding-top: $margine-tessere-utilities*3;
+  
+  .carta{
+    max-width: 50px;
+    min-height: 80px;
+    margin-left: 0!important;
+    margin-top: -$margine-tessere-utilities;
+  }
 
+  .carta:first-child{
+    margin-top: 0!important;
+  }
+}
 .bot {
   height: 25vh;
   .carta {
@@ -84,7 +104,13 @@
 .colore-secondario {
   background-color: grey !important;
 }
-
+.retro-carta{
+  height: 100%;
+  width: 100%;
+  background-color: #EBD77F;
+  border: 1px solid black;
+  border-radius: 10%;
+}
 .parte-sinistra,
 .parte-destra {
   text-align: center;

@@ -16,10 +16,11 @@
   </div>
 </div>
 <!-- utilities -->
-<div class="pulsanti">
+<app-utilities (pesca)="pescaUnaTessera()" [tessere]="tessere" [isTurnoBot]="isTurnoBot"></app-utilities>
+<!-- <div class="pulsanti">
   <div class="container">
     <button mat-raised-button (click)="pescaUnaTessera()" color="primary" [disabled]="isTurnoBot">Pesca</button>
     <i class="fas fa-square"></i>
     <span class="badge">{{tessere.length}}</span>
   </div>
-</div>
+</div> -->

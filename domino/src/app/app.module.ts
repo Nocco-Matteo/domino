@@ -12,12 +12,14 @@ import { GrowlComponent } from './components/growl/growl.component';
 import { MatCardModule } from '@angular/material/card';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
+import { UtilitiesComponent } from './components/utilities/utilities.component';
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     TessereComponent,
-    GrowlComponent
+    GrowlComponent,
+    UtilitiesComponent
   ],
   imports: [
     BrowserModule,

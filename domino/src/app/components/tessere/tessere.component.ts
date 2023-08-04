@@ -1,6 +1,6 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { AGGIUNTA_ANIMATION } from 'src/app/animations/animation';
+import { AGGIUNTA_ANIMATION, USCITA_ANIMATION } from 'src/app/animations/animation';
 import { Tessera } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
 
@@ -8,11 +8,12 @@ import { PartitaService } from 'src/app/services/partita.service';
   selector: 'app-tessere',
   templateUrl: './tessere.component.html',
   styleUrls: ['./tessere.component.scss'],
-  animations: [AGGIUNTA_ANIMATION],
+  animations: [AGGIUNTA_ANIMATION,USCITA_ANIMATION],
 })
 export class TessereComponent implements OnInit {
   @Input() isDragDisabled: boolean = false;
   @Input() isBot: boolean = false;
+  @Input() isUtilities: boolean = false;
   @Input() isBanco: boolean = false;
   @Input() tessere!: Tessera[];
 
