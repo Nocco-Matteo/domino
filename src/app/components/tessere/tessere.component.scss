@@ -17,6 +17,7 @@ $margine-tessere-utilities: 60px;
   height: 100%;
   margin-left: -35px !important;
 }
+
 .banco {
   width: 80%;
   height: 60vh;
@@ -43,16 +44,25 @@ $margine-tessere-utilities: 60px;
   .parte-sinistra {
     border-bottom-left-radius: 10%;
     border-top-right-radius: 0 !important;
+    img {
+      border-bottom-left-radius: 10%;
+      border-top-right-radius: 0 !important;
+    }
   }
   .parte-destra {
     border-bottom-left-radius: 0 !important;
     border-top-right-radius: 10%;
+    img {
+      border-bottom-left-radius: 0 !important;
+      border-top-right-radius: 10%;
+    }
   }
 }
 
 .prima {
   margin-left: 0 !important;
 }
+
 .parti-uguali {
   flex-direction: column !important;
   height: 80px !important;
@@ -71,25 +81,24 @@ $margine-tessere-utilities: 60px;
   .parte-sinistra {
     border-top-right-radius: 10% !important;
     border-bottom-left-radius: 0 !important;
-    img{
+    img {
       border-top-right-radius: 10% !important;
-    border-bottom-left-radius: 0 !important;
+      border-bottom-left-radius: 0 !important;
     }
   }
   .parte-destra {
     border-top-right-radius: 0 !important;
     border-bottom-left-radius: 10% !important;
-    img{
+    img {
       border-top-right-radius: 0 !important;
-    border-bottom-left-radius: 10% !important;
+      border-bottom-left-radius: 10% !important;
     }
   }
 }
+
 .utilities {
   flex-direction: column;
   justify-content: start;
-
-  // padding-top: $margine-tessere-utilities*3;
 
   .carta {
     max-width: 50px;
@@ -104,8 +113,6 @@ $margine-tessere-utilities: 60px;
     margin-top: 0 !important;
   }
 }
-
-
 
 .bot {
   margin-top: -10vh;
@@ -125,7 +132,6 @@ $margine-tessere-utilities: 60px;
   border-radius: 10%;
 }
 
-
 .parte-sinistra,
 .parte-destra {
   text-align: center;
@@ -136,26 +142,25 @@ $margine-tessere-utilities: 60px;
   max-height: 80px;
   max-width: 90px;
 
-  img{
+  img {
     height: 100%;
-  width: 100%;
-
+    width: 100%;
   }
 }
 .parte-sinistra {
   border-top-left-radius: 10%;
   border-top-right-radius: 10%;
-  img{
+  img {
     border-top-left-radius: 10%;
-  border-top-right-radius: 10%;
+    border-top-right-radius: 10%;
   }
 }
 .parte-destra {
   border-bottom-left-radius: 10%;
   border-bottom-right-radius: 10%;
-  img{
+  img {
     border-bottom-left-radius: 10%;
-  border-bottom-right-radius: 10%;
+    border-bottom-right-radius: 10%;
   }
 }
 .cdk-drag-placeholder {

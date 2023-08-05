@@ -9,8 +9,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { GrowlComponent } from './components/modals/growl/growl.component';
 import { HomeComponent } from './components/home/home.component';
+import { ErroreModalComponent } from './components/modals/errore-modal/errore-modal.component';
+import { VittoriaModalComponent } from './components/modals/vittoria-modal/vittoria-modal.component';
 import { TessereComponent } from './components/tessere/tessere.component';
 import { UtilitiesComponent } from './components/utilities/utilities.component';
 @NgModule({
@@ -18,8 +19,9 @@ import { UtilitiesComponent } from './components/utilities/utilities.component';
     AppComponent,
     HomeComponent,
     TessereComponent,
-    GrowlComponent,
     UtilitiesComponent,
+    VittoriaModalComponent,
+    ErroreModalComponent,
   ],
   imports: [
     BrowserModule,

@@ -48,6 +48,20 @@ export class PartitaService {
     return setteCarteCasuali;
   }
 
+  controllaVittoria() : boolean{
+    if(this.tessereUtente.length === 0){
+      alert("Hai vinto!")
+      return true;
+    }
+
+    if(this.tessereBot.length === 0){
+      alert("Ha vinto il bot!")
+      return true;
+    }
+
+    return false
+  }
+
   generaImmagini(): any[] {
     const result = [];
     for (let i = 0; i < 7; i++) {
@@ -77,7 +91,6 @@ export class PartitaService {
     for (let x = 0; x < this.tessereBot.length; x++) {
       const { isInEstremoSinistro, isInEstremoDestro } =
         this.cercaCorrispondenza(this.tessereBot[x], this.tessereBanco);
-
       //se è uguale sia a destra che sinistra, lo mette a destra
       
       if (isInEstremoDestro) {

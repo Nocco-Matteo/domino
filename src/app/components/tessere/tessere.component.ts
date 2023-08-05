@@ -62,6 +62,7 @@ export class TessereComponent implements OnInit {
       event,
       this.cardWrapper
     );
+    
     let { isInEstremoSinistro, isInEstremoDestro } =
       this.partitaService.cercaCorrispondenza(
         cartaTrascinata,

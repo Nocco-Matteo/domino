@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { GrowlComponent } from './growl.component';
+import { VittoriaModalComponent } from './vittoria-modal.component';
 
-describe('GrowlComponent', () => {
-  let component: GrowlComponent;
-  let fixture: ComponentFixture<GrowlComponent>;
+describe('VittoriaModalComponent', () => {
+  let component: VittoriaModalComponent;
+  let fixture: ComponentFixture<VittoriaModalComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ GrowlComponent ]
+      declarations: [ VittoriaModalComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(GrowlComponent);
+    fixture = TestBed.createComponent(VittoriaModalComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

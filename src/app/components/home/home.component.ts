@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Tessera } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
-import { GrowlComponent } from '../modals/growl/growl.component';
+import { VittoriaModalComponent } from '../modals/vittoria-modal/vittoria-modal.component';
+import { ErroreModalComponent } from '../modals/errore-modal/errore-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -24,22 +25,33 @@ export class HomeComponent implements OnInit {
   constructor(
     private readonly dialog: MatDialog,
     private readonly partitaService: PartitaService
-  ) {this.immaginiCaselle = this.partitaService.generaImmagini();}
+  ) {
+    this.immaginiCaselle = this.partitaService.generaImmagini();
+  }
 
   ngOnInit(): void {
+    this.casellaSbagliata("cia")
     this.initPartita();
   }
 
-  mostraGrowl(messaggio: string) {
-    this.dialog.open(GrowlComponent, {
+  casellaSbagliata(messaggio: string) {
+    this.dialog.open(ErroreModalComponent, {
       data: { messaggio: messaggio }, // Passa il testo alla dialog utilizzando l'opzione 'data'
     });
   }
 
   nuovoTurnoBot(): void {
     this.isTurnoBot = true;
+    if (this.partitaService.controllaVittoria()) {
+      this.finePartita();
+      return;
+    }
     setTimeout(() => {
       this.partitaService.turnoBot();
+      if (this.partitaService.controllaVittoria()) {
+        this.finePartita();
+        return;
+      }
       this.isTurnoBot = false;
     }, 1500);
   }
@@ -48,7 +60,7 @@ export class HomeComponent implements OnInit {
     this.partitaService.pescaUnaTessera(false);
   }
 
-  private initPartita() {
+  private initPartita(): void {
     const { tessereUtente, tessereBanco, tessereBot, tessere } =
       this.partitaService.initTessere();
 
@@ -56,5 +68,9 @@ export class HomeComponent implements OnInit {
     this.tessereBanco = tessereBanco;
     this.tessereBot = tessereBot;
     this.tessere = tessere;
+  }
+
+  private finePartita(): void {
+    this.dialog.open(VittoriaModalComponent);
   }
 }
