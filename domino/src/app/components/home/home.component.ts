@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Tessera } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
-import { GrowlComponent } from '../growl/growl.component';
+import { GrowlComponent } from '../modals/growl/growl.component';
 
 @Component({
   selector: 'app-home',
@@ -19,11 +19,12 @@ export class HomeComponent implements OnInit {
   tessereUtente: Tessera[] = [];
 
   modale?: MatDialogRef<any>;
+  immaginiCaselle: any;
 
   constructor(
     private readonly dialog: MatDialog,
     private readonly partitaService: PartitaService
-  ) {}
+  ) {this.immaginiCaselle = this.partitaService.generaImmagini();}
 
   ngOnInit(): void {
     this.initPartita();
@@ -45,7 +46,6 @@ export class HomeComponent implements OnInit {
 
   pescaUnaTessera(): void {
     this.partitaService.pescaUnaTessera(false);
-    this.nuovoTurnoBot();
   }
 
   private initPartita() {

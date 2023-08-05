@@ -1,8 +1,8 @@
-import { Injectable, OnDestroy } from '@angular/core';
+import { ElementRef, Injectable, OnDestroy } from '@angular/core';
 import { Observable, Subject, takeWhile } from 'rxjs';
 import { Tessera } from '../models/models';
 import { TessereComponent } from '../components/tessere/tessere.component';
-import { transferArrayItem } from '@angular/cdk/drag-drop';
+import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 
 @Injectable({
   providedIn: 'root',
@@ -32,8 +32,8 @@ export class PartitaService {
     }
   }
 
-  private estraiSetteTessereCasuali(): Tessera[] {
 
+  private estraiSetteTessereCasuali(): Tessera[] {
     const setteCarteCasuali: Tessera[] = [];
     const numeroTessere = 7;
 
@@ -48,6 +48,16 @@ export class PartitaService {
     return setteCarteCasuali;
   }
 
+  generaImmagini(): any[] {
+    const result = [];
+    for (let i = 0; i < 7; i++) {
+      result.push({
+        immagine: `https://picsum.photos/200?random=${Math.random()}`,
+      });
+    }
+    return result;
+  }
+  
   initTessere() {
     this.popolaTessere();
     this.tessereUtente = this.estraiSetteTessereCasuali();
@@ -57,23 +67,19 @@ export class PartitaService {
       tessereUtente: this.tessereUtente,
       tessereBanco: this.tessereBanco,
       tessereBot: this.tessereBot,
-      tessere: this.tessere
+      tessere: this.tessere,
     };
   }
 
   turnoBot() {
     this._turno++;
-    
+
     for (let x = 0; x < this.tessereBot.length; x++) {
       const { isInEstremoSinistro, isInEstremoDestro } =
         this.cercaCorrispondenza(this.tessereBot[x], this.tessereBanco);
 
-      //se è uguale sia a destra che sinistra
-      if (isInEstremoDestro && isInEstremoSinistro) {
-        //TODO: scelta se a destra o sinistra
-        return;
-      }
-
+      //se è uguale sia a destra che sinistra, lo mette a destra
+      
       if (isInEstremoDestro) {
         transferArrayItem(
           this.tessereBot, //tessere dell'utente
@@ -81,8 +87,6 @@ export class PartitaService {
           x, //indice nelle tessere dell'utente
           this.tessere.length //indice in cui metterlo
         );
-        ;
-
         return;
       }
 
@@ -93,20 +97,23 @@ export class PartitaService {
           x, //indice nelle tessere dell'utente
           0 //indice in cui metterlo
         );
-        ;
-
         return;
       }
     }
 
     this.pescaUnaTessera(true);
+    if (this.tessere.length > 0) {
+      this.turnoBot();
+    }
+
+    //tessere finite-->passaggio turno
   }
 
   get turno() {
     return this._turno;
   }
 
-  cercaCorrispondenza(cartaTrascinata: Tessera, tessere: Tessera[]) {
+  cercaCorrispondenza(cartaTrascinata: Tessera, tessere: Tessera[], isRilasciatoADestra? : boolean) {
     const estremoSinistro = tessere[0].parteSinistra;
     const estremoDestro = tessere[tessere.length - 1].parteDestra;
 
@@ -117,10 +124,7 @@ export class PartitaService {
       case cartaTrascinata.parteSinistra:
         isInEstremoSinistro = true;
 
-        //inversione tessera
-        cartaTrascinata.parteSinistra = cartaTrascinata.parteDestra;
-        cartaTrascinata.parteDestra = estremoSinistro;
-        cartaTrascinata.invertita = !cartaTrascinata.invertita;
+        this.invertiTessera(cartaTrascinata);
         break;
       case cartaTrascinata.parteDestra:
         isInEstremoSinistro = true;
@@ -134,27 +138,40 @@ export class PartitaService {
       case cartaTrascinata.parteDestra:
         isInEstremoDestro = true;
 
-        //inversione tessera
-        cartaTrascinata.parteDestra = cartaTrascinata.parteSinistra;
-        cartaTrascinata.parteSinistra = estremoDestro;
-        cartaTrascinata.invertita = !cartaTrascinata.invertita;
+        if(isRilasciatoADestra===false){
+          break
+        }
+        this.invertiTessera(cartaTrascinata);
         break;
     }
 
     return { isInEstremoSinistro, isInEstremoDestro };
   }
 
-  pescaUnaTessera(isBot : boolean) : void{
-    if(isBot){
+  invertiTessera(tessera: Tessera): void {
+    const tesseraTmp = { ...tessera };
+    tessera.parteDestra = tesseraTmp.parteSinistra;
+    tessera.parteSinistra = tesseraTmp.parteDestra;
+    tessera.invertita = !tessera.invertita;
+  }
+
+  isRilasciatoADestra(event: CdkDragDrop<any>,elementRef : ElementRef) : boolean {
+    const oggettoRilasciatoX = event.dropPoint.x -180;
+    const centroContenitoreX = elementRef.nativeElement.clientWidth / 2;
+    return oggettoRilasciatoX > centroContenitoreX;
+  }
+
+  pescaUnaTessera(isBot: boolean): void {
+    if (isBot) {
       transferArrayItem(
-      this.tessere, //tessere dell'utente
-      this.tessereBot, //tessere del banco
-      0, //indice nelle tessere dell'utente
-      this.tessereBot.length //indice in cui metterlo
-    );
-    return;
+        this.tessere, //tessere dell'utente
+        this.tessereBot, //tessere del banco
+        0, //indice nelle tessere dell'utente
+        this.tessereBot.length //indice in cui metterlo
+      );
+      return;
     }
-    
+
     transferArrayItem(
       this.tessere, //tessere dell'utente
       this.tessereUtente, //tessere del banco

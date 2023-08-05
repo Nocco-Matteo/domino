@@ -6,7 +6,6 @@ $margine-tessere-utilities: 60px;
   align-items: center;
   height: 25vh;
   padding: 10px 0;
-  
 }
 .carta {
   border-radius: 50%;
@@ -16,18 +15,18 @@ $margine-tessere-utilities: 60px;
   flex-direction: column;
   width: 120px;
   height: 100%;
-    margin-left: -35px !important;
+  margin-left: -35px !important;
 }
 .banco {
   width: 80%;
-  height: 50vh;
+  height: 60vh;
   margin: 0 auto;
   justify-content: center;
   align-items: center;
   background-image: url("../../../assets/imgs/tavoloBackground2.jpg");
   background-size: contain;
-  border: 10px solid brown; 
-  border-radius: 10px; 
+  border: 10px solid brown;
+  border-radius: 10px;
 
   .carta {
     flex-direction: row;
@@ -51,7 +50,6 @@ $margine-tessere-utilities: 60px;
   }
 }
 
-
 .prima {
   margin-left: 0 !important;
 }
@@ -73,29 +71,44 @@ $margine-tessere-utilities: 60px;
   .parte-sinistra {
     border-top-right-radius: 10% !important;
     border-bottom-left-radius: 0 !important;
+    img{
+      border-top-right-radius: 10% !important;
+    border-bottom-left-radius: 0 !important;
+    }
   }
   .parte-destra {
     border-top-right-radius: 0 !important;
     border-bottom-left-radius: 10% !important;
+    img{
+      border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 10% !important;
+    }
   }
 }
-.utilities{
+.utilities {
   flex-direction: column;
   justify-content: start;
+
   // padding-top: $margine-tessere-utilities*3;
-  
-  .carta{
+
+  .carta {
     max-width: 50px;
     min-height: 80px;
-    margin-left: 0!important;
+    max-height: 80px;
+
+    margin-left: 0 !important;
     margin-top: -$margine-tessere-utilities;
   }
 
-  .carta:first-child{
-    margin-top: 0!important;
+  .carta:first-child {
+    margin-top: 0 !important;
   }
 }
+
+
+
 .bot {
+  margin-top: -10vh;
   height: 25vh;
   .carta {
     cursor: default !important;
@@ -104,13 +117,15 @@ $margine-tessere-utilities: 60px;
 .colore-secondario {
   background-color: grey !important;
 }
-.retro-carta{
+.retro-carta {
   height: 100%;
   width: 100%;
-  background-color: #EBD77F;
+  background-color: #ebd77f;
   border: 1px solid black;
   border-radius: 10%;
 }
+
+
 .parte-sinistra,
 .parte-destra {
   text-align: center;
@@ -118,14 +133,30 @@ $margine-tessere-utilities: 60px;
   border: 1px solid black;
   height: 100%;
   width: 100%;
+  max-height: 80px;
+  max-width: 90px;
+
+  img{
+    height: 100%;
+  width: 100%;
+
+  }
 }
 .parte-sinistra {
   border-top-left-radius: 10%;
   border-top-right-radius: 10%;
+  img{
+    border-top-left-radius: 10%;
+  border-top-right-radius: 10%;
+  }
 }
 .parte-destra {
   border-bottom-left-radius: 10%;
   border-bottom-right-radius: 10%;
+  img{
+    border-bottom-left-radius: 10%;
+  border-bottom-right-radius: 10%;
+  }
 }
 .cdk-drag-placeholder {
   opacity: 0;

@@ -17,4 +17,8 @@ export class UtilitiesComponent {
   pescaUnaTessera():void{
     this.pesca.emit()
   }
+
+  tessereFinite() : boolean{
+    return this.tessere.length===0
+  }
 }

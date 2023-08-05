@@ -1,9 +1,9 @@
 <!-- bottone pesca -->
-<button class="bottone-pesca" mat-raised-button (click)="pescaUnaTessera()" [disabled]="isTurnoBot">Pesca</button>
+<button class="bottone-pesca" mat-raised-button (click)="pescaUnaTessera()" [disabled]="isTurnoBot || tessereFinite()">Pesca</button>
 
 <!-- tessere rimaste -->
 <div class="tessere-banco">
-  <app-tessere [tessere]="tessere" [isUtilities]="true"></app-tessere>
+  <app-tessere [isDragDisabled]="true" [tessere]="tessere" [isUtilities]="true"></app-tessere>
 </div>
 
 <!--  -->

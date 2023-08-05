@@ -6,19 +6,22 @@ $altezza-conteggio-tessere: 400px;
   height: $altezza-bottone;
   position: fixed;
   right: 2%;
-  bottom: calc(50% - ($altezza-bottone/2));
+  bottom: calc(60% - ($altezza-bottone/2));
   background-color: #ffd700 !important;
 }
 
 .tessere-banco {
+  background-image: url("../../../assets/imgs/tavoloBackground2.jpg");
+  background-size: contain;
   position: fixed;
   left: 1%;
-  bottom: calc(50% - ($altezza-conteggio-tessere/2));
+  bottom: calc(55% - ($altezza-conteggio-tessere/2));
   border-radius: 20px;
   height: $altezza-conteggio-tessere;
   width: 8%;
-  border: 1px solid #000;
-  background-color: #a67c52;
+  border: 5px solid brown; 
+
+  // background-color: #a67c52;
 }
 
 .conteggio-tessere {
@@ -29,7 +32,7 @@ $altezza-conteggio-tessere: 400px;
 .badge {
   position: fixed;
   left: 1.5%;
-  bottom: calc(51% - ($altezza-conteggio-tessere/2));
+  bottom: calc(56% - ($altezza-conteggio-tessere/2));
   background-color: red;
   color: white;
   border-radius: 50%;

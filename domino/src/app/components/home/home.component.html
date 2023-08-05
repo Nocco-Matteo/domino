@@ -2,25 +2,18 @@
 <!-- Body -->
 <div class="board" cdkDropListGroup>
   <div class="bot">
-    <app-tessere [isDragDisabled]="true" [isBot]="true" [tessere]="tessereBot"></app-tessere>
+    <app-tessere [immaginiCaselle]="immaginiCaselle" [isDragDisabled]="true" [isBot]="true" [tessere]="tessereBot"></app-tessere>
   </div>
   <div #parteSinistraDiv class="banco">
-    <app-tessere (nuovoTurnoBot)="nuovoTurnoBot()" (emettiGrowl)="mostraGrowl($event)" #bancoContent
+    <app-tessere [immaginiCaselle]="immaginiCaselle" (nuovoTurnoBot)="nuovoTurnoBot()" (emettiGrowl)="mostraGrowl($event)" #bancoContent
       [tessere]="tessereBanco" cdkDropListSortingDisabled [isBanco]="true" cdkDropList [cdkDropListData]="tessereBanco"
       (cdkDropListDropped)="bancoContent.cartaRilasciata($event)"> </app-tessere>
   </div>
   <div class="utente">
-    <app-tessere [isDragDisabled]="isTurnoBot" [tessere]="tessereUtente" cdkDropList cdkDropListSortingDisabled
+    <app-tessere [immaginiCaselle]="immaginiCaselle" [isDragDisabled]="isTurnoBot" [tessere]="tessereUtente" cdkDropList cdkDropListSortingDisabled
       [cdkDropListData]="tessereUtente">
     </app-tessere>
   </div>
 </div>
 <!-- utilities -->
 <app-utilities (pesca)="pescaUnaTessera()" [tessere]="tessere" [isTurnoBot]="isTurnoBot"></app-utilities>
-<!-- <div class="pulsanti">
-  <div class="container">
-    <button mat-raised-button (click)="pescaUnaTessera()" color="primary" [disabled]="isTurnoBot">Pesca</button>
-    <i class="fas fa-square"></i>
-    <span class="badge">{{tessere.length}}</span>
-  </div>
-</div> -->
