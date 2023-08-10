@@ -71,7 +71,7 @@ export class PartitaService {
     }
     return result;
   }
-  
+
   initTessere() {
     this.popolaTessere();
     this.tessereUtente = this.estraiSetteTessereCasuali();
@@ -92,13 +92,13 @@ export class PartitaService {
       const { isInEstremoSinistro, isInEstremoDestro } =
         this.cercaCorrispondenza(this.tessereBot[x], this.tessereBanco);
       //se è uguale sia a destra che sinistra, lo mette a destra
-      
+
       if (isInEstremoDestro) {
         transferArrayItem(
           this.tessereBot, //tessere dell'utente
           this.tessereBanco, //tessere del banco
           x, //indice nelle tessere dell'utente
-          this.tessere.length //indice in cui metterlo
+          this.tessereBanco.length //indice in cui metterlo
         );
         return;
       }

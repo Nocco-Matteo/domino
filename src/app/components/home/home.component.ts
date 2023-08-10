@@ -30,7 +30,6 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.casellaSbagliata("cia")
     this.initPartita();
   }
 
