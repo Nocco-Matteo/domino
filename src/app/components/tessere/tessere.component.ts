@@ -99,7 +99,7 @@ export class TessereComponent implements OnInit {
     }
 
     //non uguale
-    this.emettiGrowl.emit('Casella non corrispondente');
+    this.emettiGrowl.emit('La tessera non può essere collegata');
   }
 
   private init(): void {}

@@ -49,17 +49,7 @@ export class PartitaService {
   }
 
   controllaVittoria() : boolean{
-    if(this.tessereUtente.length === 0){
-      alert("Hai vinto!")
-      return true;
-    }
-
-    if(this.tessereBot.length === 0){
-      alert("Ha vinto il bot!")
-      return true;
-    }
-
-    return false
+    return this.tessereBot.length === 0 || this.tessereUtente.length === 0
   }
 
   generaImmagini(): any[] {
@@ -98,7 +88,7 @@ export class PartitaService {
           this.tessereBot, //tessere dell'utente
           this.tessereBanco, //tessere del banco
           x, //indice nelle tessere dell'utente
-          this.tessere.length //indice in cui metterlo
+          this.tessereBanco.length //indice in cui metterlo
         );
         return;
       }

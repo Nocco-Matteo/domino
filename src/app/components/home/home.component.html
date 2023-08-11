@@ -1,19 +1,39 @@
-
 <!-- Body -->
-<div class="board" cdkDropListGroup>
+<div class="board"
+     cdkDropListGroup>
   <div class="bot">
-    <app-tessere [immaginiCaselle]="immaginiCaselle" [isDragDisabled]="true" [isBot]="true" [tessere]="tessereBot"></app-tessere>
+    <app-tessere [immaginiCaselle]="immaginiCaselle"
+                 [isDragDisabled]="true"
+                 [isBot]="true"
+                 [tessere]="tessereBot"></app-tessere>
   </div>
-  <div #parteSinistraDiv class="banco">
-    <app-tessere [isDragDisabled]="true" [immaginiCaselle]="immaginiCaselle" (nuovoTurnoBot)="nuovoTurnoBot()" (emettiGrowl)="casellaSbagliata($event)" #bancoContent
-      [tessere]="tessereBanco" cdkDropListSortingDisabled [isBanco]="true" cdkDropList [cdkDropListData]="tessereBanco"
-      (cdkDropListDropped)="bancoContent.cartaRilasciata($event)"> </app-tessere>
+  <div #parteSinistraDiv
+       class="banco">
+    <app-tessere #bancoContent
+                 cdkDropList
+                 cdkDropListSortingDisabled
+                 [tessere]="tessereBanco"
+                 [immaginiCaselle]="immaginiCaselle"
+                 [isDragDisabled]="true"
+                 [isBanco]="true"
+                 [cdkDropListData]="tessereBanco"
+                 (emettiGrowl)="casellaSbagliata($event)"
+                 (nuovoTurnoBot)="nuovoTurnoBot()"
+                 (cdkDropListDropped)="bancoContent.cartaRilasciata($event)">
+    </app-tessere>
   </div>
   <div class="utente">
-    <app-tessere [immaginiCaselle]="immaginiCaselle" [isDragDisabled]="isTurnoBot" [tessere]="tessereUtente" cdkDropList cdkDropListSortingDisabled
-      [cdkDropListData]="tessereUtente">
+    <app-tessere cdkDropList
+                 cdkDropListSortingDisabled
+                 [tessere]="tessereUtente"
+                 [immaginiCaselle]="immaginiCaselle"
+                 [cdkDropListData]="tessereUtente"
+                 [isDragDisabled]="isTurnoBot">
     </app-tessere>
   </div>
 </div>
 <!-- utilities -->
-<app-utilities (pesca)="pescaUnaTessera()" [tessere]="tessere" [isTurnoBot]="isTurnoBot"></app-utilities>
+<app-utilities [tessere]="tessere"
+               [isTurnoBot]="isTurnoBot"
+               (pesca)="pescaUnaTessera()">
+</app-utilities>
