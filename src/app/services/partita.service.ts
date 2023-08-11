@@ -49,17 +49,7 @@ export class PartitaService {
   }
 
   controllaVittoria() : boolean{
-    if(this.tessereUtente.length === 0){
-      alert("Hai vinto!")
-      return true;
-    }
-
-    if(this.tessereBot.length === 0){
-      alert("Ha vinto il bot!")
-      return true;
-    }
-
-    return false
+    return this.tessereBot.length === 0 || this.tessereUtente.length === 0
   }
 
   generaImmagini(): any[] {

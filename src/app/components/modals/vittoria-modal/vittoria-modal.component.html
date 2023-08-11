@@ -1,5 +1,8 @@
-<mat-dialog-content class="vittoria-modal">
+<mat-dialog-content class="vittoria-modal"
+                    matDialogClose>
   <h2 class="modal-title">Congratulazioni!</h2>
-  <p class="modal-message">Hai vinto la partita!</p>
-  <button mat-button class="modal-button" (click)="closeModal()">Chiudi</button>
+  <p class="modal-message">{{data.messaggio}}</p>
+  <button class="modal-button"
+          mat-button
+          mat-dialog-close>Chiudi</button>
 </mat-dialog-content>

@@ -42,13 +42,13 @@ export class HomeComponent implements OnInit {
   nuovoTurnoBot(): void {
     this.isTurnoBot = true;
     if (this.partitaService.controllaVittoria()) {
-      this.finePartita();
+      this.finePartita("Hai vinto!");
       return;
     }
     setTimeout(() => {
       this.partitaService.turnoBot();
       if (this.partitaService.controllaVittoria()) {
-        this.finePartita();
+        this.finePartita("Hai perso!");
         return;
       }
       this.isTurnoBot = false;
@@ -69,7 +69,7 @@ export class HomeComponent implements OnInit {
     this.tessere = tessere;
   }
 
-  private finePartita(): void {
-    this.dialog.open(VittoriaModalComponent);
+  private finePartita(messaggio: string): void {
+    this.dialog.open(VittoriaModalComponent, { data: { messaggio: messaggio } });
   }
 }
