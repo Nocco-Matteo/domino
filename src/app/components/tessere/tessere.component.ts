@@ -1,3 +1,4 @@
+import { CdkDragStart } from '@angular/cdk/drag-drop';
 import {
   Component,
   Input,
@@ -9,6 +10,7 @@ import {
 } from 'src/app/animations/animation';
 import { PARTI } from 'src/app/configs/config';
 import { Tessera } from 'src/app/models/models';
+import { PartitaService } from 'src/app/services/partita.service';
 
 @Component({
   selector: 'app-tessere',
@@ -25,7 +27,16 @@ export class TessereComponent implements OnInit {
   @Input() isUtilities: boolean = false;
   @Input() tessere!: Tessera[];
 
-  constructor() {}
+  constructor(private readonly partitaService: PartitaService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  checkHints(card: CdkDragStart<any>): void {
+    const carta = card.source.data
+    this.partitaService.checkHints(carta);
+  }
+
+  hideHints(): void {
+    this.partitaService.hideHints()
+  }
 }

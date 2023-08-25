@@ -36,8 +36,6 @@ export class AppComponent implements OnInit, OnDestroy {
       .observe([Breakpoints.HandsetPortrait, Breakpoints.TabletPortrait])
       .subscribe((state) => {
         if (state.matches) {
-          console.log('state: ', state);
-
           if (!this.dialogRef) {
             const dialogConfig = new MatDialogConfig();
             dialogConfig.panelClass = 'custom-dialog-class';

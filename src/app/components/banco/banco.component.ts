@@ -1,5 +1,6 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
+import { takeWhile, tap } from 'rxjs';
 import { AGGIUNTA_ANIMATION } from 'src/app/animations/animation';
 import { PARTI } from 'src/app/configs/config';
 import { Immagine, Tessera } from 'src/app/models/models';
@@ -11,8 +12,12 @@ import { PartitaService } from 'src/app/services/partita.service';
   styleUrls: ['./banco.component.scss'],
   animations: [AGGIUNTA_ANIMATION]
 })
-export class BancoComponent {
+export class BancoComponent implements OnInit, OnDestroy {
   readonly parti = PARTI;
+  private unsubscribe: boolean = true;
+
+  isShownLeftHint: boolean = false;
+  isShownRightHint: boolean = false;
 
   @Input() tessere!: Tessera[];
   @Input() immaginiCaselle!: Immagine[];
@@ -23,7 +28,23 @@ export class BancoComponent {
   @ViewChild('CardWrapper', { static: true }) cardWrapper!: ElementRef;
 
   constructor(private readonly partitaService: PartitaService) { }
+  ngOnDestroy(): void {
+    this.unsubscribe = false;
+  }
 
+  ngOnInit(): void {
+    this.init()
+  }
+
+  private init(): void {
+    this.partitaService.hintsObservable$.pipe(
+      takeWhile(() => this.unsubscribe),
+      tap((res: boolean[]) => {
+        this.isShownLeftHint = res[0]
+        this.isShownRightHint = res[1]
+      }))
+      .subscribe()
+  }
   prendiParteArray(parte: PARTI): Tessera[] {
     return this.partitaService.prendiParteArray(parte)
   }

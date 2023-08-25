@@ -12,7 +12,9 @@
          [cdkDragDisabled]="isDragDisabled"
          [cdkDragPreviewClass]="'carta'"
          [cdkDragData]="tessera"
-         [ngClass]="i===0?' prima':''">
+         [ngClass]="i===0?' prima':''"
+         (cdkDragStarted)="checkHints($event)"
+         (cdkDragEnded)="hideHints()">
 
       <ng-container *ngIf="isBot;else fronteTessera">
         <div class="retro-carta">

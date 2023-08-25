@@ -4,6 +4,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { VittoriaModalComponent } from '../components/modals/vittoria-modal/vittoria-modal.component';
 import { PARTI } from '../configs/config';
 import { Immagine, Tessera } from '../models/models';
+import { Observable, Subject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -17,12 +18,16 @@ export class PartitaService {
 
   private _turno: number = 1;
 
+  private hintsSubject: Subject<boolean[]> = new Subject<boolean[]>();
+
+  hintsObservable$: Observable<boolean[]> = this.hintsSubject.asObservable();
+
   constructor(
     private readonly dialog: MatDialog,
   ) { }
 
   private popolaTessere(): void {
-    let num = 0    
+    let num = 0
     for (let valore1 = 0; valore1 < 6; valore1++) {
       for (let valore2 = valore1; valore2 < 6; valore2++) {
         num++
@@ -44,7 +49,7 @@ export class PartitaService {
       }
     }
     console.log(num);
-    
+
   }
 
 
@@ -154,6 +159,19 @@ export class PartitaService {
     this.dialog.open(VittoriaModalComponent, { data: { messaggio: messaggio } });
   }
 
+  checkHints(carta: Tessera) : void{
+    const { isInEstremoSinistro, isInEstremoDestro } =
+      this.cercaCorrispondenza(carta, this.tessereBanco)
+
+    this.hintsSubject.next([isInEstremoSinistro, isInEstremoDestro]);
+  }
+
+  hideHints() : void{
+    const isInEstremoDestro = false;
+    const isInEstremoSinistro = false;
+    this.hintsSubject.next([isInEstremoSinistro, isInEstremoDestro]);
+  }
+
   nuovoTurnoBot(turnoBot: { isTurnoBot: boolean }): void {
     turnoBot.isTurnoBot = true;
     if (this.controllaVittoria()) {
@@ -234,7 +252,7 @@ export class PartitaService {
 
   initTessere() {
     this.popolaTessere();
-    
+
     this.tessereUtente = this.estraiSetteTessereCasuali();
     this.tessereBot = this.estraiSetteTessereCasuali();
 
@@ -327,7 +345,7 @@ export class PartitaService {
         break;
     }
     console.log("parte: ", parte, "; tessere: ", parteArray);
-    
+
     return parteArray;
   }
 
@@ -376,11 +394,14 @@ export class PartitaService {
   }
 
   cercaCorrispondenza(cartaTrascinata: Tessera, tessere: Tessera[], isRilasciatoADestra?: boolean) {
-    const estremoSinistro = tessere[0].parteSinistra;
-    const estremoDestro = tessere[tessere.length - 1].parteDestra;
-
     let isInEstremoSinistro = false;
     let isInEstremoDestro = false;
+    if (tessere.length === 0) {
+      return { isInEstremoSinistro, isInEstremoDestro };
+    }
+
+    const estremoSinistro = tessere[0].parteSinistra;
+    const estremoDestro = tessere[tessere.length - 1].parteDestra;
 
     switch (estremoSinistro) {
       case cartaTrascinata.parteSinistra:

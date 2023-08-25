@@ -64,8 +64,41 @@
     flex-direction: column;
   }
 
-  .centrale{
+  .centrale {
     height: 80px;
+    position: relative;
+  }
+
+  .leftHint::before {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    border: 1px dashed #ebd77f;
+    left: -85px;
+    top: calc(50% - (40px / 2));
+  }
+
+  .rightHint::after {
+    content: "";
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    border: 1px dashed #ebd77f;
+    right: -85px;
+    top: calc(50% - (40px / 2));
+  }
+
+  .centrale-sinistra {
+    display: flex;
+    justify-content: start;
+    align-items: end;
+  }
+
+  .centrale-destra {
+    display: flex;
+    justify-content: end;
+    align-items: start;
   }
   .destra {
     display: flex;
@@ -97,45 +130,45 @@
   }
 }
 
-.maggiore-spazio{
-    margin-top: 0!important;
-    margin-bottom: 0!important;
+.maggiore-spazio {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 .parti-uguali {
-    flex-direction: column !important;
-    height: 80px !important;
+  flex-direction: column !important;
+  height: 80px !important;
+  max-height: none !important;
+  max-width: 40px !important;
+
+  .carta {
+    padding: 0 !important;
     max-height: none !important;
-    max-width: 40px !important;
-  
-    .carta {
-      padding: 0 !important;
-      max-height: none !important;
-      max-width: none !important;
-    }
-    .parte-destra,
-    .parte-sinistra {
-      width: 40px !important;
-      height: 40px !important;
-    }
-    .parte-sinistra {
+    max-width: none !important;
+  }
+  .parte-destra,
+  .parte-sinistra {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  .parte-sinistra {
+    border-top-right-radius: 10% !important;
+    border-bottom-left-radius: 0 !important;
+    img {
       border-top-right-radius: 10% !important;
       border-bottom-left-radius: 0 !important;
-      img {
-        border-top-right-radius: 10% !important;
-        border-bottom-left-radius: 0 !important;
-      }
-    }
-    .parte-destra {
-      border-top-right-radius: 0 !important;
-      border-bottom-left-radius: 10% !important;
-      img {
-        border-top-right-radius: 0 !important;
-        border-bottom-left-radius: 10% !important;
-      }
     }
   }
+  .parte-destra {
+    border-top-right-radius: 0 !important;
+    border-bottom-left-radius: 10% !important;
+    img {
+      border-top-right-radius: 0 !important;
+      border-bottom-left-radius: 10% !important;
+    }
+  }
+}
 
-  .parte-sinistra,
+.parte-sinistra,
 .parte-destra {
   text-align: center;
   background-color: ghostwhite;
