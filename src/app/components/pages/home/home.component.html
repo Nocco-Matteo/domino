@@ -1,4 +1,3 @@
-<!-- Body -->
 <div class="board"
      cdkDropListGroup>
   <div class="bot">
@@ -9,18 +8,16 @@
   </div>
   <div #parteSinistraDiv
        class="banco">
-    <app-tessere #bancoContent
-                 cdkDropList
-                 cdkDropListSortingDisabled
-                 [tessere]="tessereBanco"
-                 [immaginiCaselle]="immaginiCaselle"
-                 [isDragDisabled]="true"
-                 [isBanco]="true"
-                 [cdkDropListData]="tessereBanco"
-                 (emettiGrowl)="casellaSbagliata($event)"
-                 (nuovoTurnoBot)="nuovoTurnoBot()"
-                 (cdkDropListDropped)="bancoContent.cartaRilasciata($event)">
-    </app-tessere>
+    <app-banco #bancoContent
+               cdkDropList
+               cdkDropListSortingDisabled
+               [tessere]="tessereBanco"
+               [immaginiCaselle]="immaginiCaselle"
+               [cdkDropListData]="tessereBanco"
+               (emettiGrowl)="casellaSbagliata($event)"
+               (nuovoTurnoBot)="nuovoTurnoBot()"
+               (cdkDropListDropped)="bancoContent.cartaRilasciata($event)">
+    </app-banco>
   </div>
   <div class="utente">
     <app-tessere cdkDropList
@@ -28,12 +25,14 @@
                  [tessere]="tessereUtente"
                  [immaginiCaselle]="immaginiCaselle"
                  [cdkDropListData]="tessereUtente"
-                 [isDragDisabled]="isTurnoBot">
+                 [isDragDisabled]="turnoBot.isTurnoBot">
     </app-tessere>
   </div>
 </div>
-<!-- utilities -->
+
 <app-utilities [tessere]="tessere"
-               [isTurnoBot]="isTurnoBot"
+               [isTurnoBot]="turnoBot.isTurnoBot"
                (pesca)="pescaUnaTessera()">
 </app-utilities>
+
+<!-- <app-game></app-game> -->

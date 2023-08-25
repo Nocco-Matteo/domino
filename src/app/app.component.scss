@@ -1,0 +1,11 @@
+.custom-dialog-class {
+    background-color: transparent!important;
+}
+
+::ng-deep mat-dialog-container{
+    background-color: transparent!important;
+    > div > div{
+    background-color: transparent!important;
+        box-shadow: none!important;
+    }
+}
