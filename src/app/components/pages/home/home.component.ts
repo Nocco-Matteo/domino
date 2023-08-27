@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Tessera } from 'src/app/models/models';
+import { IsTurnoBot, Tessera } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
-import { VittoriaModalComponent } from '../modals/vittoria-modal/vittoria-modal.component';
-import { ErroreModalComponent } from '../modals/errore-modal/errore-modal.component';
+import { VittoriaModalComponent } from '../../modals/vittoria-modal/vittoria-modal.component';
+import { ErroreModalComponent } from '../../modals/errore-modal/errore-modal.component';
 
 @Component({
   selector: 'app-home',
@@ -11,7 +11,7 @@ import { ErroreModalComponent } from '../modals/errore-modal/errore-modal.compon
   styleUrls: ['./home.component.scss'],
 })
 export class HomeComponent implements OnInit {
-  isTurnoBot: boolean = false;
+  turnoBot: IsTurnoBot = { isTurnoBot: false };
 
   tessere: Tessera[] = [];
 
@@ -31,28 +31,17 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
     this.initPartita();
+
   }
 
   casellaSbagliata(messaggio: string) {
     this.dialog.open(ErroreModalComponent, {
-      data: { messaggio: messaggio }, // Passa il testo alla dialog utilizzando l'opzione 'data'
+      data: { messaggio: messaggio },
     });
   }
 
   nuovoTurnoBot(): void {
-    this.isTurnoBot = true;
-    if (this.partitaService.controllaVittoria()) {
-      this.finePartita("Hai vinto!");
-      return;
-    }
-    setTimeout(() => {
-      this.partitaService.turnoBot();
-      if (this.partitaService.controllaVittoria()) {
-        this.finePartita("Hai perso!");
-        return;
-      }
-      this.isTurnoBot = false;
-    }, 1500);
+    this.partitaService.nuovoTurnoBot(this.turnoBot)
   }
 
   pescaUnaTessera(): void {
@@ -62,14 +51,10 @@ export class HomeComponent implements OnInit {
   private initPartita(): void {
     const { tessereUtente, tessereBanco, tessereBot, tessere } =
       this.partitaService.initTessere();
-
+    
     this.tessereUtente = tessereUtente;
     this.tessereBanco = tessereBanco;
     this.tessereBot = tessereBot;
     this.tessere = tessere;
-  }
-
-  private finePartita(messaggio: string): void {
-    this.dialog.open(VittoriaModalComponent, { data: { messaggio: messaggio } });
   }
 }

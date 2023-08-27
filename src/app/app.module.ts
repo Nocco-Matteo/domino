@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { NgOptimizedImage } from '@angular/common';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatDialogModule } from '@angular/material/dialog';
@@ -9,11 +10,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/home/home.component';
+import { HomeComponent } from './components/pages/home/home.component';
 import { ErroreModalComponent } from './components/modals/errore-modal/errore-modal.component';
+import { LandscapeModalComponent } from './components/modals/landscape-modal/landscape-modal.component';
 import { VittoriaModalComponent } from './components/modals/vittoria-modal/vittoria-modal.component';
 import { TessereComponent } from './components/tessere/tessere.component';
 import { UtilitiesComponent } from './components/utilities/utilities.component';
+import { BancoComponent } from './components/banco/banco.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -22,6 +25,8 @@ import { UtilitiesComponent } from './components/utilities/utilities.component';
     UtilitiesComponent,
     VittoriaModalComponent,
     ErroreModalComponent,
+    LandscapeModalComponent,
+    BancoComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +36,8 @@ import { UtilitiesComponent } from './components/utilities/utilities.component';
     DragDropModule,
     MatCardModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    NgOptimizedImage
   ],
   providers: [],
   bootstrap: [AppComponent]
