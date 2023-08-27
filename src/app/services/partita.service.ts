@@ -378,6 +378,8 @@ export class PartitaService {
 
   turnoBot() {
     this._turno++;
+    console.log("tessere bot: ",this.tessereBot);
+    
     if(this.tessereBanco.length===0){
       transferArrayItem(
         this.tessereBot,

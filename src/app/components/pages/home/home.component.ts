@@ -45,10 +45,12 @@ export class HomeComponent implements OnInit {
   }
 
   pescaUnaTessera(): void {
+    debugger
     this.partitaService.pescaUnaTessera(false);
   }
 
   passaIlTurno() : void {
+    debugger
     this.nuovoTurnoBot()
   }
 

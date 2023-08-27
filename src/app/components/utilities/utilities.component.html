@@ -2,10 +2,10 @@
 
 <button class="bottone-pesca"
         mat-raised-button
-        (click)="primaPescata || tessereFinite()?pescaUnaTessera():passaIlTurno()"
+        (click)="!!(tessereFinite()) ? passaIlTurno(): !!(primaPescata )? pescaUnaTessera():passaIlTurno()"
         [disabled]="isTurnoBot"
         [@pescaEPassa]="testoBottone">
-        {{testoBottone}}
+  {{testoBottone}}
 </button>
 
 <!-- tessere rimaste -->
