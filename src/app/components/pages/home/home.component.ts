@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, Renderer2  } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { Tessera } from 'src/app/models/models';
+import { IsTurnoBot, Tessera } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
 import { VittoriaModalComponent } from '../../modals/vittoria-modal/vittoria-modal.component';
 import { ErroreModalComponent } from '../../modals/errore-modal/errore-modal.component';
@@ -27,7 +27,7 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
   ]
 })
 export class HomeComponent implements OnInit {
-  turnoBot: {isTurnoBot:boolean} = {isTurnoBot:false};
+  turnoBot: IsTurnoBot = { isTurnoBot: false };
 
   tessere: Tessera[] = [];
 
@@ -84,7 +84,7 @@ export class HomeComponent implements OnInit {
   private initPartita(): void {
     const { tessereUtente, tessereBanco, tessereBot, tessere } =
       this.partitaService.initTessere();
-
+    
     this.tessereUtente = tessereUtente;
     this.tessereBanco = tessereBanco;
     this.tessereBot = tessereBot;

@@ -21,3 +21,6 @@ export interface Immagine{
   immagine : string;
 }
 
+export interface IsTurnoBot{
+  isTurnoBot: boolean;
+}

@@ -2,8 +2,8 @@ import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { ElementRef, Injectable } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { VittoriaModalComponent } from '../components/modals/vittoria-modal/vittoria-modal.component';
-import { PARTI } from '../configs/config';
-import { Immagine, Tessera } from '../models/models';
+import { BOT_NUMERO_TURNI, LIMITE_TESSERE_CENTRALI, LIMITE_TESSERE_VERTICALI, PARTI } from '../configs/config';
+import { Immagine, IsTurnoBot, Tessera } from '../models/models';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({
@@ -48,7 +48,7 @@ export class PartitaService {
         this.tessere.push(carta);
       }
     }
-    console.log(num);
+    console.log("tessere: ", this.tessere);
 
   }
 
@@ -68,9 +68,9 @@ export class PartitaService {
     return setteCarteCasuali;
   }
 
-  private gestisciSecondoBlocco(parte: string): number {
-    const parteInvertita = parte === "sinistra" ? "destra" : "sinistra"
-    if (!this.controllaVerticale(parteInvertita, this.tessereBanco)) {
+  private gestisciSecondoBlocco(parte: PARTI): number {
+    const parteInvertita = parte === PARTI.sinistra ? PARTI.destra : PARTI.sinistra
+    if (!this.controllaLimite(parteInvertita, this.tessereBanco)) {
       console.log("nessuna corrispondenza", parte, "--", this.tessereBanco);
       return 0;
     }
@@ -111,7 +111,7 @@ export class PartitaService {
           }
         }
         break;
-      case PARTI.centraleinferiore:
+      case PARTI.centraleInferiore:
         for (const tessera of this.tessere) {
           tesserePrima++;
           if (tessera.isLimitSinistro.secondo) {
@@ -123,7 +123,7 @@ export class PartitaService {
     return tesserePrima;
   }
 
-  private gestisciTerzoBlocco(parte: string): number {
+  private gestisciTerzoBlocco(parte: PARTI): number {
     if (!this.controllaOrizzontale(parte, this.tessereBanco)) {
       console.log("nessuna corrispondenza Oriz", parte, "--", this.tessereBanco);
       return 0;
@@ -131,7 +131,7 @@ export class PartitaService {
     let tesserePrima = 0;
 
     switch (parte) {
-      case "sinistra":
+      case PARTI.sinistra:
         for (const tessera of this.tessereBanco) {
           tesserePrima++;
           if (tessera.isLimitDestro.secondo) {
@@ -139,7 +139,7 @@ export class PartitaService {
           }
         }
         break;
-      case "destra":
+      case PARTI.destra:
         let limiteTrovato = false;
 
         for (const tessera of this.tessere) {
@@ -159,27 +159,30 @@ export class PartitaService {
     this.dialog.open(VittoriaModalComponent, { data: { messaggio: messaggio } });
   }
 
-  checkHints(carta: Tessera) : void{
+  checkHints(carta: Tessera): void {
     const { isInEstremoSinistro, isInEstremoDestro } =
       this.cercaCorrispondenza(carta, this.tessereBanco)
 
     this.hintsSubject.next([isInEstremoSinistro, isInEstremoDestro]);
   }
 
-  hideHints() : void{
+  hideHints(): void {
     const isInEstremoDestro = false;
     const isInEstremoSinistro = false;
     this.hintsSubject.next([isInEstremoSinistro, isInEstremoDestro]);
   }
 
-  nuovoTurnoBot(turnoBot: { isTurnoBot: boolean }): void {
+  nuovoTurnoBot(turnoBot: IsTurnoBot): void {
     turnoBot.isTurnoBot = true;
     if (this.controllaVittoria()) {
       this.finePartita("Hai vinto!");
       return;
     }
     setTimeout(() => {
-      this.turnoBot();
+      for (let index = 0; index < BOT_NUMERO_TURNI; index++) {
+        this.turnoBot()
+      }
+
       if (this.controllaVittoria()) {
         this.finePartita("Hai perso!");
         return;
@@ -188,7 +191,7 @@ export class PartitaService {
     }, 1500);
   }
 
-  controllaVerticale(parte: string, tessere: Tessera[]): boolean {
+  controllaLimite(parte: PARTI, tessere: Tessera[]): boolean {
     let res = false;
     switch (parte) {
       case PARTI.sinistra:
@@ -200,42 +203,59 @@ export class PartitaService {
       case PARTI.centraleSuperiore:
         res = !!(tessere.find((tessera) => tessera.isLimitSinistro.secondo))
         break;
-      case PARTI.centraleinferiore:
+      case PARTI.centraleInferiore:
         res = !!(tessere.find((tessera) => tessera.isLimitDestro.secondo))
         break;
     }
     return res;
   }
 
-  controllaOrizzontale(parte: string, tessere: Tessera[]): boolean {
+  controllaOrizzontale(parte: PARTI, tessere: Tessera[]): boolean {
     return parte === "sinistra" ?
       !!(tessere.find((tessera) => tessera.isLimitSinistro.secondo)) :
       !!(tessere.find((tessera) => tessera.isLimitDestro.secondo));
   }
 
-  gestisciLimite(parte: string): void {
-    const limiteCentrale = 9;
-    const limiteVerticali = 3;
+  gestisciLimite(parte: PARTI): void {
+    const limiteCentrale = LIMITE_TESSERE_CENTRALI;
+    const limiteVerticali = LIMITE_TESSERE_VERTICALI;
 
-    const tesserePrima = this.gestisciSecondoBlocco(parte);
-    const tesserePrimaSinistra = this.prendiParteArray(PARTI.sinistra).length;
-    const tesserePrimaDestra = this.prendiParteArray(PARTI.destra).length;
+    // const tesserePrima = this.gestisciSecondoBlocco(parte);
+
+    const tesserePrimaSinistra = this.prendiParteArray(PARTI.sinistra)
+    tesserePrimaSinistra.push(...this.prendiParteArray(PARTI.centraleSuperiore))
+
+    const tesserePrimaDestra = this.prendiParteArray(PARTI.destra);
+    tesserePrimaDestra.push(...this.prendiParteArray(PARTI.centraleInferiore))
 
     switch (parte) {
-      case "sinistra":
-        if (this.tessereBanco.length - tesserePrima === limiteCentrale) {
-          this.tessereBanco[1].isLimitSinistro.primo = true
+      case PARTI.sinistra:
+        if (tesserePrimaSinistra?.length === limiteVerticali) {
+          debugger
+          tesserePrimaSinistra[0].isLimitSinistro.secondo = true;
+          break;
+        }
+        if (this.tessereBanco.length === limiteCentrale) {
+          debugger
+          this.tessereBanco[0].isLimitSinistro.primo = true
           this.tessereBanco[limiteCentrale - 1].isLimitDestro.primo = true
         }
         break;
-      case "destra":
-        if (this.tessereBanco.length - tesserePrima === limiteCentrale) {
+      case PARTI.destra:
+        if (tesserePrimaDestra?.length === limiteVerticali) {
+          debugger
+          tesserePrimaDestra[limiteVerticali-1].isLimitDestro.secondo = true;
+          break;
+        }
+        if (this.tessereBanco.length === limiteCentrale) {
+          debugger
           this.tessereBanco[0].isLimitSinistro.primo = true
-          this.tessereBanco[limiteCentrale - 2].isLimitDestro.primo = true
+          this.tessereBanco[limiteCentrale - 1].isLimitDestro.primo = true
         }
         break;
     }
   }
+
   controllaVittoria(): boolean {
     return this.tessereBot.length === 0 || this.tessereUtente.length === 0
   }
@@ -266,44 +286,46 @@ export class PartitaService {
   }
 
   prendiParteArray(parte: PARTI): Tessera[] {
-    if (!this.controllaVerticale(parte, this.tessereBanco)
+    if (!this.controllaLimite(parte, this.tessereBanco)
       && parte !== PARTI.centro) {
       return []
     }
 
-    const parteArray = [];
+    let parteArray = [];
+    let limiteSinistroTrovato = false;
+    let limiteDestroTrovato = false;
+
     switch (parte) {
       case PARTI.sinistra:
-        for (const tessera of this.tessereBanco) {
 
+        for (const tessera of this.tessereBanco) {
+          if (tessera.isLimitSinistro.secondo) {
+            parteArray = []
+          }
           if (tessera.isLimitSinistro.primo) {
             break;
           }
+
           parteArray.push(tessera);
-
         }
-
-        console.log("parte di sinistra: ", parteArray);
 
         break;
       case PARTI.destra:
-        let limiteTrovato = false;
-
         for (const tessera of this.tessereBanco) {
-          if (limiteTrovato) {
+          if (limiteDestroTrovato) {
             parteArray.push(tessera);
           }
+          if(tessera.isLimitDestro.secondo){
+            break;
+          }
           if (tessera.isLimitDestro.primo) {
-            limiteTrovato = true;
+            limiteDestroTrovato = true;
           }
         }
         break;
-
       case PARTI.centro:
-        let limiteSinistroTrovato = false;
-        let limiteDestroTrovato = false;
-        if (this.controllaVerticale(PARTI.sinistra, this.tessereBanco)
-          && this.controllaVerticale(PARTI.destra, this.tessereBanco)) {
+        if (this.controllaLimite(PARTI.sinistra, this.tessereBanco)
+          && this.controllaLimite(PARTI.destra, this.tessereBanco)) {
           for (const tessera of this.tessereBanco) {
             if (tessera.isLimitSinistro.primo) {
               limiteSinistroTrovato = true;
@@ -317,30 +339,32 @@ export class PartitaService {
             }
           }
         }
-        else if (!this.controllaVerticale(PARTI.sinistra, this.tessereBanco)
-          && !this.controllaVerticale(PARTI.destra, this.tessereBanco)) {
+        else if (!this.controllaLimite(PARTI.sinistra, this.tessereBanco)
+          && !this.controllaLimite(PARTI.destra, this.tessereBanco)) {
           for (const tessera of this.tessereBanco) {
             parteArray.push(tessera);
           }
         }
         break;
       case PARTI.centraleSuperiore:
+
         for (const tessera of this.tessereBanco) {
           if (tessera.isLimitSinistro.secondo) {
             break;
           }
+
           parteArray.push(tessera);
         }
+
         break;
-      case PARTI.centraleinferiore:
-        limiteTrovato = false;
+      case PARTI.centraleInferiore:
 
         for (const tessera of this.tessereBanco) {
-          if (limiteTrovato) {
+          if (limiteDestroTrovato) {
             parteArray.push(tessera);
           }
-          if (tessera.isLimitDestro.primo) {
-            limiteTrovato = true;
+          if (tessera.isLimitDestro.secondo) {
+            limiteDestroTrovato = true;
           }
         }
         break;
@@ -359,6 +383,7 @@ export class PartitaService {
       //se è uguale sia a destra che sinistra, lo mette a destra
 
       if (isInEstremoDestro) {
+        this.gestisciLimite(PARTI.destra);
         transferArrayItem(
           this.tessereBot,
           this.tessereBanco,
@@ -366,18 +391,17 @@ export class PartitaService {
           this.tessereBanco.length
         );
 
-        this.gestisciLimite("destra");
         return;
       }
 
       if (isInEstremoSinistro) {
+        this.gestisciLimite(PARTI.sinistra)
         transferArrayItem(
           this.tessereBot,
           this.tessereBanco,
           x,
           0
         );
-        this.gestisciLimite("sinistra")
         return;
       }
     }
@@ -428,6 +452,7 @@ export class PartitaService {
         this.invertiTessera(cartaTrascinata);
         break;
     }
+
 
     return { isInEstremoSinistro, isInEstremoDestro };
   }
