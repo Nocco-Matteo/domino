@@ -24,7 +24,7 @@
     padding: 0 !important;
     max-width: 80px;
     width: 120px;
-    margin: 0 5px;
+    margin-left: 5px;
   }
   .parte-sinistra,
   .parte-destra {
@@ -67,6 +67,7 @@
   .centrale {
     height: 80px;
     position: relative;
+    margin-right: 5px;
   }
 
   .leftHint::before {
@@ -92,19 +93,24 @@
   .centrale-sinistra {
     display: flex;
     justify-content: start;
-    align-items: end;
+    align-items: center;
+    height: 80px;
+    margin-bottom: -15px;
   }
 
   .centrale-destra {
     display: flex;
     justify-content: end;
-    align-items: start;
+    align-items: center;
+    height: 80px;
+    margin-right: 5px;
+    margin-top: -15px;
   }
   .destra {
     display: flex;
     justify-content: end;
     align-items: end;
-    margin-top: -15px;
+    margin-top: -20px;
     .carta {
       margin-right: -15px !important;
       margin-top: 5px !important;
@@ -118,7 +124,7 @@
     display: flex;
     justify-content: start;
     align-items: start;
-    margin-bottom: -15px;
+    margin-bottom: -20px;
     margin-left: 5px;
     .carta {
       margin-left: -20px !important;
@@ -130,10 +136,23 @@
   }
 }
 
-.maggiore-spazio {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
+.maggiore-spazio-sinistra {
+  margin-top: 0!important;
+  margin-bottom: -5px !important;
 }
+.maggiore-spazio-destra {
+  margin-top: 0!important;
+}
+.minore-spazio {
+  margin-bottom: -10px !important;
+}
+.maggiore-spazio-superiore {
+  margin-bottom: 5px !important;
+}
+.minore-spazio-inferiore {
+  margin-top: 5px !important;
+}
+
 .parti-uguali {
   flex-direction: column !important;
   height: 80px !important;

@@ -58,8 +58,26 @@ export class BancoComponent implements OnInit, OnDestroy {
       case PARTI.destra:
         found = !!(this.tessere.find((card) => card.isLimitDestro.primo)?.uguali)
         break;
+      case PARTI.centraleSuperiore:
+        found = !!(this.tessere.find((card) => card.isLimitSinistro.secondo)?.uguali)
+        break;
     }
     return found;
+  }
+  isFirstCardVertical(parte: PARTI): boolean {
+    let res = false
+    switch (parte) {
+      case PARTI.centraleSuperiore:
+        res = !!this.prendiParteArray(parte).reverse()[0]?.uguali
+
+        break;
+      case PARTI.centraleInferiore:
+        res = !!this.prendiParteArray(parte).reverse()[this.prendiParteArray(parte).length - 1]?.uguali
+        break;
+      default:
+        break;
+    }
+    return res;
   }
   cartaRilasciata(event: CdkDragDrop<any>): void {
     const tessereUtente = event.previousContainer.data;
@@ -97,6 +115,8 @@ export class BancoComponent implements OnInit, OnDestroy {
     }
     //se è uguale a sinistra
     if (isInEstremoSinistro) {
+      this.partitaService.gestisciLimite(PARTI.sinistra)
+
       transferArrayItem(
         tessereUtente, //tessere da cui prendere la tessera
         this.tessere, //tessere in cui mettere la tessera
@@ -104,22 +124,20 @@ export class BancoComponent implements OnInit, OnDestroy {
         0 //indice in cui mettere la tessera
       );
 
-      this.partitaService.gestisciLimite("sinistra")
-
       this.nuovoTurnoBot.emit();
       return;
     }
 
     //se è uguale a destra
     if (isInEstremoDestro) {
+      this.partitaService.gestisciLimite(PARTI.destra)
+
       transferArrayItem(
         tessereUtente,
         this.tessere,
         tesseraTrascinataIndex,
         this.tessere.length
       );
-
-      this.partitaService.gestisciLimite("destra")
 
       this.nuovoTurnoBot.emit();
       return;
