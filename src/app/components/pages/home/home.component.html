@@ -1,38 +1,30 @@
-<div class="board"
-     cdkDropListGroup>
-  <div class="bot">
-    <app-tessere [immaginiCaselle]="immaginiCaselle"
-                 [isDragDisabled]="true"
-                 [isBot]="true"
-                 [tessere]="tessereBot"></app-tessere>
-  </div>
-  <div #parteSinistraDiv
-       class="banco">
-    <app-banco #bancoContent
-               cdkDropList
-               cdkDropListSortingDisabled
-               [tessere]="tessereBanco"
-               [immaginiCaselle]="immaginiCaselle"
-               [cdkDropListData]="tessereBanco"
-               (emettiGrowl)="casellaSbagliata($event)"
-               (nuovoTurnoBot)="nuovoTurnoBot()"
-               (cdkDropListDropped)="bancoContent.cartaRilasciata($event)">
-    </app-banco>
-  </div>
-  <div class="utente">
-    <app-tessere cdkDropList
-                 cdkDropListSortingDisabled
-                 [tessere]="tessereUtente"
-                 [immaginiCaselle]="immaginiCaselle"
-                 [cdkDropListData]="tessereUtente"
-                 [isDragDisabled]="turnoBot.isTurnoBot">
-    </app-tessere>
-  </div>
+<div *ngIf="!showGame" class="d-flex justify-content-center align-items-center vh-100">
+  <button class="btn btn-primary btn-lg btn-extra-large" [@zoom]="zoomState" (click)="goFullscreen()">GIOCA</button>
 </div>
 
-<app-utilities [tessere]="tessere"
-               [isTurnoBot]="turnoBot.isTurnoBot"
-               (pesca)="pescaUnaTessera()">
-</app-utilities>
 
-<!-- <app-game></app-game> -->
+<div *ngIf="showGame">
+
+  <div class="board" cdkDropListGroup>
+    <div class="bot">
+      <app-tessere [immaginiCaselle]="immaginiCaselle" [isDragDisabled]="true" [isBot]="true"
+        [tessere]="tessereBot"></app-tessere>
+    </div>
+    <div #parteSinistraDiv class="banco">
+      <app-banco #bancoContent cdkDropList cdkDropListSortingDisabled [tessere]="tessereBanco"
+        [immaginiCaselle]="immaginiCaselle" [cdkDropListData]="tessereBanco" (emettiGrowl)="casellaSbagliata($event)"
+        (nuovoTurnoBot)="nuovoTurnoBot()" (cdkDropListDropped)="bancoContent.cartaRilasciata($event)">
+      </app-banco>
+    </div>
+    <div class="utente">
+      <app-tessere cdkDropList cdkDropListSortingDisabled [tessere]="tessereUtente" [immaginiCaselle]="immaginiCaselle"
+        [cdkDropListData]="tessereUtente" [isDragDisabled]="turnoBot.isTurnoBot">
+      </app-tessere>
+    </div>
+  </div>
+
+
+  <app-utilities [tessere]="tessere" [isTurnoBot]="turnoBot.isTurnoBot" (pesca)="pescaUnaTessera()">
+  </app-utilities>
+
+</div>

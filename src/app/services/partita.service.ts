@@ -242,9 +242,10 @@ export class PartitaService {
 
   generaImmagini(): Immagine[] {
     const result = [];
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 6; i++) {
       result.push({
-        immagine: `https://picsum.photos/200?random=${Math.random()}`,
+       // immagine: `https://picsum.photos/200?random=${Math.random()}`,
+       immagine: 'assets/imgs/tessere/tessera'+(i+1)+'.jpeg'
       });
     }
     return result;

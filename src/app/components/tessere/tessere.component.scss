@@ -75,7 +75,7 @@ $margine-tessere-utilities: 60px;
 }
 
 .bot {
-  margin-top: -10vh;
+  margin-top: -15vh;
   height: 25vh;
   .carta {
     cursor: default !important;
@@ -123,9 +123,9 @@ $margine-tessere-utilities: 60px;
     border-bottom-right-radius: 10%;
   }
 }
-//view elemento mentre viene spostato 
+//view elemento mentre viene spostato
 .cdk-drag-preview{
- 
+
 }
 //elemento sostitutivo quando viene spostato dalla sua posizione
 .cdk-drag-placeholder {
