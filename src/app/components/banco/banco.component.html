@@ -3,8 +3,8 @@
   <section class="blocchi">
     <!-- centro-sinistra -->
     <div class="blocco-carta centrale-sinistra"
-    [class.minore-spazio]="isLastCardVertical(parti.centraleSuperiore)"
-    [class.maggiore-spazio-superiore]="isFirstCardVertical(parti.centraleSuperiore)">
+         [class.minore-spazio]="isLastCardVertical(parti.centraleSuperiore)"
+         [class.maggiore-spazio-superiore]="isFirstCardVertical(parti.centraleSuperiore)">
       <div #cartaContainer
            *ngFor="let tessera of prendiParteArray(parti.centraleSuperiore).reverse();index as i"
            class="carta"
@@ -55,8 +55,8 @@
     </div>
     <!-- centro-centro -->
     <div class="blocco-carta centrale"
-         [class.leftHint]="isShownLeftHint&&prendiParteArray(parti.centro).length<8"
-         [class.rightHint]="isShownRightHint&&prendiParteArray(parti.centro).length<8">
+         [class.leftHint]="isShownLeftHint&&prendiParteArray(parti.centro).length<limiteTessereCentrali"
+         [class.rightHint]="isShownRightHint&&prendiParteArray(parti.centro).length<limiteTessereCentrali">
       <div #cartaContainer
            *ngFor="let tessera of prendiParteArray(parti.centro);index as i"
            class="carta"
@@ -107,29 +107,29 @@
     </div>
     <!-- centro-destra -->
     <div class="blocco-carta centrale-destra"
-    [class.minore-spazio-inferiore]="isFirstCardVertical(parti.centraleInferiore)">
-     <div #cartaContainer
-     *ngFor="let tessera of prendiParteArray(parti.centraleInferiore).reverse();index as i"
-     class="carta"
-     cdkDrag
-     cdkDragBoundary="board"
-     [@entryAnimation]
-     [cdkDragDisabled]="true"
-     [cdkDragPreviewClass]="'carta'"
-     [cdkDragData]="tessera"
-     [ngClass]="tessera.uguali?  'parti-uguali':''">
+         [class.minore-spazio-inferiore]="isFirstCardVertical(parti.centraleInferiore)">
+      <div #cartaContainer
+           *ngFor="let tessera of prendiParteArray(parti.centraleInferiore).reverse();index as i"
+           class="carta"
+           cdkDrag
+           cdkDragBoundary="board"
+           [@entryAnimation]
+           [cdkDragDisabled]="true"
+           [cdkDragPreviewClass]="'carta'"
+           [cdkDragData]="tessera"
+           [ngClass]="tessera.uguali?  'parti-uguali':''">
 
-  <div class="parte-sinistra"
-       [ngClass]="tessera.invertita?'colore-secondario':null">
-    <img [src]="immaginiCaselle[tessera.parteDestra].immagine"
-         alt="Immagine parte sinistra">
-  </div>
-  <div class="parte-destra"
-       [ngClass]="!tessera.invertita? 'colore-secondario':null">
-    <img [src]="immaginiCaselle[tessera.parteSinistra].immagine"
-         alt="Immagine parte sinistra">
-  </div>
-</div>
+        <div class="parte-sinistra"
+             [ngClass]="tessera.invertita?'colore-secondario':null">
+          <img [src]="immaginiCaselle[tessera.parteDestra].immagine"
+               alt="Immagine parte sinistra">
+        </div>
+        <div class="parte-destra"
+             [ngClass]="!tessera.invertita? 'colore-secondario':null">
+          <img [src]="immaginiCaselle[tessera.parteSinistra].immagine"
+               alt="Immagine parte sinistra">
+        </div>
+      </div>
     </div>
   </section>
 </div>

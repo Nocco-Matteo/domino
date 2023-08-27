@@ -2,12 +2,12 @@ $altezza-bottone: 50px;
 $altezza-conteggio-tessere: 400px;
 
 .bottone-pesca {
-  width: 100px;
+  width: 150px;
   height: $altezza-bottone;
   position: fixed;
   right: 2%;
-  bottom: calc(60% - ($altezza-bottone/2));
-  background-color: #ffd700 !important;
+  // bottom: calc(60% - ($altezza-bottone/2));
+  bottom: 2%;  
 }
 
 .tessere-banco {

@@ -38,3 +38,10 @@ export const LANDSCAPE_ANIMATION = trigger('landscapeAnimation', [
 export const DROP_CARD_ANIMATION = trigger('dropPossibility', [
   transition(':enter',animate('')) 
 ]) 
+
+export const PESCA_PASSA_ANIMATION = trigger('pescaEPassa', [
+  state('Pesca', style({backgroundColor: '#ffd700'})),
+  state('Passa', style({backgroundColor: 'blue'})),
+  transition('*=>Pesca',animate('0.2s')),
+  transition('Pesca=>Passa',animate('0.2s')),
+])

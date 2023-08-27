@@ -2,7 +2,7 @@ import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
 import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, ViewChild } from '@angular/core';
 import { takeWhile, tap } from 'rxjs';
 import { AGGIUNTA_ANIMATION } from 'src/app/animations/animation';
-import { PARTI } from 'src/app/configs/config';
+import { LIMITE_TESSERE_CENTRALI, PARTI } from 'src/app/configs/config';
 import { Immagine, Tessera } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
 
@@ -13,6 +13,7 @@ import { PartitaService } from 'src/app/services/partita.service';
   animations: [AGGIUNTA_ANIMATION]
 })
 export class BancoComponent implements OnInit, OnDestroy {
+  readonly limiteTessereCentrali = LIMITE_TESSERE_CENTRALI;
   readonly parti = PARTI;
   private unsubscribe: boolean = true;
 

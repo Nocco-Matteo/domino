@@ -1,5 +1,5 @@
 import { CdkDragDrop, transferArrayItem } from '@angular/cdk/drag-drop';
-import { ElementRef, Injectable } from '@angular/core';
+import { ElementRef, Injectable, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { VittoriaModalComponent } from '../components/modals/vittoria-modal/vittoria-modal.component';
 import { BOT_NUMERO_TURNI, LIMITE_TESSERE_CENTRALI, LIMITE_TESSERE_VERTICALI, PARTI } from '../configs/config';
@@ -10,6 +10,8 @@ import { Observable, Subject } from 'rxjs';
   providedIn: 'root',
 })
 export class PartitaService {
+  private primaPescata: boolean = true;
+
   private tessere: Tessera[] = [];
 
   private tessereBot: Tessera[] = [];
@@ -25,7 +27,7 @@ export class PartitaService {
   constructor(
     private readonly dialog: MatDialog,
   ) { }
-
+  
   private popolaTessere(): void {
     let num = 0
     for (let valore1 = 0; valore1 < 6; valore1++) {
@@ -217,7 +219,7 @@ export class PartitaService {
   }
 
   gestisciLimite(parte: PARTI): void {
-    const limiteCentrale = LIMITE_TESSERE_CENTRALI; 
+    const limiteCentrale = LIMITE_TESSERE_CENTRALI;
     const limiteVerticali = LIMITE_TESSERE_VERTICALI;
 
     // const tesserePrima = this.gestisciSecondoBlocco(parte);
@@ -231,24 +233,24 @@ export class PartitaService {
     switch (parte) {
       case PARTI.sinistra:
         if (tesserePrimaSinistra?.length === limiteVerticali) {
-          debugger
+          
           tesserePrimaSinistra[0].isLimitSinistro.secondo = true;
           break;
         }
         if (this.tessereBanco.length === limiteCentrale) {
-          debugger
+          
           this.tessereBanco[0].isLimitSinistro.primo = true
           this.tessereBanco[limiteCentrale - 1].isLimitDestro.primo = true
         }
         break;
       case PARTI.destra:
         if (tesserePrimaDestra?.length === limiteVerticali) {
-          debugger
-          tesserePrimaDestra[limiteVerticali-1].isLimitDestro.secondo = true;
+          
+          tesserePrimaDestra[limiteVerticali - 1].isLimitDestro.secondo = true;
           break;
         }
         if (this.tessereBanco.length === limiteCentrale) {
-          debugger
+          
           this.tessereBanco[0].isLimitSinistro.primo = true
           this.tessereBanco[limiteCentrale - 1].isLimitDestro.primo = true
         }
@@ -265,7 +267,7 @@ export class PartitaService {
     for (let i = 0; i < 8; i++) {
       result.push({
         // immagine: `https://picsum.photos/200?random=${Math.random()}`,
-        immagine: `assets/imgs/tessere/tessera${i+1}.jpeg`,
+        immagine: `assets/imgs/tessere/tessera${i + 1}.jpeg`,
       });
     }
     return result;
@@ -315,7 +317,7 @@ export class PartitaService {
           if (limiteDestroTrovato) {
             parteArray.push(tessera);
           }
-          if(tessera.isLimitDestro.secondo){
+          if (tessera.isLimitDestro.secondo) {
             break;
           }
           if (tessera.isLimitDestro.primo) {
@@ -347,7 +349,7 @@ export class PartitaService {
         }
         break;
       case PARTI.centraleSuperiore:
-        
+
         for (const tessera of this.tessereBanco) {
           if (tessera.isLimitSinistro.secondo) {
             break;
@@ -355,7 +357,7 @@ export class PartitaService {
 
           parteArray.push(tessera);
         }
-        
+
         break;
       case PARTI.centraleInferiore:
 
@@ -376,7 +378,15 @@ export class PartitaService {
 
   turnoBot() {
     this._turno++;
-
+    if(this.tessereBanco.length===0){
+      transferArrayItem(
+        this.tessereBot,
+        this.tessereBanco,
+        0,
+        this.tessereBanco.length
+      );
+      return
+    }
     for (let x = 0; x < this.tessereBot.length; x++) {
       const { isInEstremoSinistro, isInEstremoDestro } =
         this.cercaCorrispondenza(this.tessereBot[x], this.tessereBanco);
@@ -406,11 +416,13 @@ export class PartitaService {
       }
     }
 
-    this.pescaUnaTessera(true);
-    if (this.tessere.length > 0) {
+    if(this.primaPescata){
+      this.primaPescata = false
+      this.pescaUnaTessera(true);
       this.turnoBot();
-    }
-
+    }else{
+      this.primaPescata = true
+    }    
     //tessere finite-->passaggio turno
   }
 
@@ -453,7 +465,7 @@ export class PartitaService {
         break;
     }
 
-    
+
     return { isInEstremoSinistro, isInEstremoDestro };
   }
 
@@ -471,6 +483,10 @@ export class PartitaService {
   }
 
   pescaUnaTessera(isBot: boolean): void {
+    if(this.tessere.length ===0){
+      return
+    }
+
     if (isBot) {
       transferArrayItem(
         this.tessere,

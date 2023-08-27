@@ -1,13 +1,28 @@
 <!-- bottone pesca -->
-<button class="bottone-pesca" mat-raised-button (click)="pescaUnaTessera()" [disabled]="isTurnoBot || tessereFinite()">Pesca</button>
+
+<button class="bottone-pesca"
+        mat-raised-button
+        (click)="primaPescata || tessereFinite()?pescaUnaTessera():passaIlTurno()"
+        [disabled]="isTurnoBot"
+        [@pescaEPassa]="testoBottone">
+        {{testoBottone}}
+</button>
 
 <!-- tessere rimaste -->
+
 <div class="tessere-banco">
-  <app-tessere [isDragDisabled]="true" [tessere]="tessere" [isUtilities]="true"></app-tessere>
+  <app-tessere [isDragDisabled]="true"
+               [tessere]="tessere"
+               [isUtilities]="true">
+  </app-tessere>
 </div>
 
-<!--  -->
+<!-- Bollino conteggio tessere -->
+
 <div class="conteggio-tessere">
-  <i class="fas fa-square"></i>
-  <span class="badge">{{tessere.length}}</span>
+  <i class="fas fa-square">
+  </i>
+  <span class="badge">
+    {{tessere.length}}
+  </span>
 </div>

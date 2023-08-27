@@ -48,6 +48,10 @@ export class HomeComponent implements OnInit {
     this.partitaService.pescaUnaTessera(false);
   }
 
+  passaIlTurno() : void {
+    this.nuovoTurnoBot()
+  }
+
   private initPartita(): void {
     const { tessereUtente, tessereBanco, tessereBot, tessere } =
       this.partitaService.initTessere();
