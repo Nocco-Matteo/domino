@@ -1,9 +1,3 @@
-<div *ngIf="!showGame" class="d-flex justify-content-center align-items-center vh-100">
-  <button class="btn btn-primary btn-lg btn-extra-large" [@zoom]="zoomState" (click)="goFullscreen()">GIOCA</button>
-</div>
-
-
-<div *ngIf="showGame">
 
   <div class="board" cdkDropListGroup>
     <div class="bot">
@@ -26,5 +20,3 @@
 
   <app-utilities [tessere]="tessere" [isTurnoBot]="turnoBot.isTurnoBot" (pesca)="pescaUnaTessera()">
   </app-utilities>
-
-</div>

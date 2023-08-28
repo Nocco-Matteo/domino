@@ -17,6 +17,7 @@ import { VittoriaModalComponent } from './components/modals/vittoria-modal/vitto
 import { TessereComponent } from './components/tessere/tessere.component';
 import { UtilitiesComponent } from './components/utilities/utilities.component';
 import { BancoComponent } from './components/banco/banco.component';
+import { InizioModalComponent } from './components/modals/inizio-modal/inizio-modal.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +28,7 @@ import { BancoComponent } from './components/banco/banco.component';
     ErroreModalComponent,
     LandscapeModalComponent,
     BancoComponent,
+    InizioModalComponent,
   ],
   imports: [
     BrowserModule,
