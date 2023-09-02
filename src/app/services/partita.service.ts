@@ -220,7 +220,6 @@ export class PartitaService {
 
   gestisciLimite(parte: PARTI): void {
     const limiteCentrale = LIMITE_TESSERE_CENTRALI;
-    const limiteCentrale = LIMITE_TESSERE_CENTRALI;
     const limiteVerticali = LIMITE_TESSERE_VERTICALI;
 
     // const tesserePrima = this.gestisciSecondoBlocco(parte);
