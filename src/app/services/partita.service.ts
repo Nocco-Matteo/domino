@@ -269,7 +269,6 @@ export class PartitaService {
     const result = [];
     for (let i = 0; i < 6; i++) {
       result.push({
-        // immagine: `https://picsum.photos/200?random=${Math.random()}`,
         immagine: `assets/imgs/tessere/tessera${i + 1}.jpeg`,
       });
     }
