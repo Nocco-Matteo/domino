@@ -4,6 +4,7 @@ import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material/dial
 import { Subscription } from 'rxjs';
 import { LandscapeModalComponent } from './components/modals/landscape-modal/landscape-modal.component';
 import { PartitaService } from './services/partita.service';
+import { InizioModalComponent } from './components/modals/inizio-modal/inizio-modal.component';
 
 @Component({
   selector: 'app-root',
@@ -32,6 +33,11 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   init(): void {
+    this.dialog.open(InizioModalComponent, {
+      height: '100vh',
+      width: '100vw',
+      maxWidth: 'none'
+    });
     this.breakpointSubscription = this.breakpointObserver
       .observe([Breakpoints.HandsetPortrait, Breakpoints.TabletPortrait])
       .subscribe((state) => {

@@ -220,6 +220,7 @@ export class PartitaService {
 
   gestisciLimite(parte: PARTI): void {
     const limiteCentrale = LIMITE_TESSERE_CENTRALI;
+    const limiteCentrale = LIMITE_TESSERE_CENTRALI;
     const limiteVerticali = LIMITE_TESSERE_VERTICALI;
 
     // const tesserePrima = this.gestisciSecondoBlocco(parte);
@@ -264,7 +265,7 @@ export class PartitaService {
 
   generaImmagini(): Immagine[] {
     const result = [];
-    for (let i = 0; i < 8; i++) {
+    for (let i = 0; i < 6; i++) {
       result.push({
         // immagine: `https://picsum.photos/200?random=${Math.random()}`,
         immagine: `assets/imgs/tessere/tessera${i + 1}.jpeg`,
@@ -350,6 +351,7 @@ export class PartitaService {
         break;
       case PARTI.centraleSuperiore:
 
+
         for (const tessera of this.tessereBanco) {
           if (tessera.isLimitSinistro.secondo) {
             break;
@@ -357,6 +359,7 @@ export class PartitaService {
 
           parteArray.push(tessera);
         }
+
 
         break;
       case PARTI.centraleInferiore:
@@ -466,6 +469,7 @@ export class PartitaService {
         this.invertiTessera(cartaTrascinata);
         break;
     }
+
 
 
     return { isInEstremoSinistro, isInEstremoDestro };

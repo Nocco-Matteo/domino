@@ -39,6 +39,18 @@ export const DROP_CARD_ANIMATION = trigger('dropPossibility', [
   transition(':enter',animate('')) 
 ]) 
 
+export const ZOOM_ANIMATION = trigger('zoom', [
+  state('zoomOut', style({
+    transform: 'scale(1)',
+  })),
+  state('zoomIn', style({
+    transform: 'scale(1.3)',  // Aumentato da 1.1 a 1.3
+  })),
+  transition('zoomOut <=> zoomIn', [
+    animate('1s ease-in-out')
+  ])
+])
+
 export const PESCA_PASSA_ANIMATION = trigger('pescaEPassa', [
   state('Pesca', style({backgroundColor: '#ffd700'})),
   state('Passa', style({backgroundColor: 'blue'})),
