@@ -280,7 +280,7 @@ export class PartitaService {
     this.popolaTessere();
 
     this.tessereUtente = this.estraiSetteTessereCasuali();
-    this.tessereBot.push(this.tessere[0]); //this.estraiSetteTessereCasuali();
+    this.tessereBot = this.estraiSetteTessereCasuali();
 
     return {
       tessereUtente: this.tessereUtente,
