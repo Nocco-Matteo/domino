@@ -22,6 +22,8 @@ export class PartitaService {
 
   private hintsSubject: Subject<boolean[]> = new Subject<boolean[]>();
 
+  private _redirectInizio: boolean = false;
+
   hintsObservable$: Observable<boolean[]> = this.hintsSubject.asObservable();
 
   constructor(
@@ -57,6 +59,7 @@ export class PartitaService {
 
   private estraiSetteTessereCasuali(): Tessera[] {
     const setteCarteCasuali: Tessera[] = [];
+    //const numeroTessere = this.tessere.length;
     const numeroTessere = 7;
 
     for (let i = 0; i < numeroTessere; i++) {
@@ -277,7 +280,7 @@ export class PartitaService {
     this.popolaTessere();
 
     this.tessereUtente = this.estraiSetteTessereCasuali();
-    this.tessereBot = this.estraiSetteTessereCasuali();
+    this.tessereBot.push(this.tessere[0]); //this.estraiSetteTessereCasuali();
 
     return {
       tessereUtente: this.tessereUtente,
@@ -432,6 +435,14 @@ export class PartitaService {
 
   get turno() {
     return this._turno;
+  }
+
+  get redirectInizio() {
+    return this._redirectInizio;
+  }
+
+  set redirectInizio(value: boolean) {
+     this._redirectInizio = value;
   }
 
   cercaCorrispondenza(cartaTrascinata: Tessera, tessere: Tessera[], isRilasciatoADestra?: boolean) {

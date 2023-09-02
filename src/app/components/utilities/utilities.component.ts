@@ -20,9 +20,8 @@ export class UtilitiesComponent {
 
   ngOnChanges(changes: SimpleChanges) {
     if (!!changes['isTurnoBot']?.previousValue) {
-      debugger
+      
       if (this.tessere.length === 0) {
-        debugger
         this.primaPescata = false
         this.testoBottone = 'Passa'
       }

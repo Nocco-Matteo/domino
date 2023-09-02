@@ -15,12 +15,23 @@ export class AppComponent implements OnInit, OnDestroy {
   title = 'domino';
   private dialogRef: MatDialogRef<LandscapeModalComponent> | null = null;
   private breakpointSubscription: Subscription | null = null;
+  //isModalOpen: boolean = false;
 
   constructor(
     private readonly breakpointObserver: BreakpointObserver,
     private readonly dialog: MatDialog,
     private readonly partitaService : PartitaService
-  ) {
+  ) 
+  {
+
+    // this.dialog.open(InizioModalComponent, {
+    //   height: '100vh',
+    //   width: '100vw',
+    //   maxWidth: 'none',
+    // });
+
+    // this.isModalOpen = false;
+
   }
 
   ngOnInit(): void {
@@ -33,11 +44,7 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   init(): void {
-    this.dialog.open(InizioModalComponent, {
-      height: '100vh',
-      width: '100vw',
-      maxWidth: 'none'
-    });
+    
     this.breakpointSubscription = this.breakpointObserver
       .observe([Breakpoints.HandsetPortrait, Breakpoints.TabletPortrait])
       .subscribe((state) => {
@@ -48,7 +55,6 @@ export class AppComponent implements OnInit, OnDestroy {
             this.dialogRef = this.dialog.open(LandscapeModalComponent, {
               disableClose: true,
             });
-
             this.dialogRef.afterClosed().subscribe(() => {
               this.dialogRef = null;
             });
@@ -61,6 +67,7 @@ export class AppComponent implements OnInit, OnDestroy {
 
   private closeDialog(): void {
     if (this.dialogRef) {
+      
       this.dialogRef.close();
       this.dialogRef = null;
     }

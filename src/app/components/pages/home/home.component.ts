@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef, Renderer2  } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef, Renderer2, ViewChild, ElementRef  } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { IsTurnoBot, Tessera } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
@@ -29,6 +29,9 @@ export class HomeComponent implements OnInit {
   modale?: MatDialogRef<any>;
   immaginiCaselle: any;
 
+  @ViewChild('board', {static:true})
+  board:ElementRef;
+
   constructor(
     private readonly dialog: MatDialog,
     private readonly partitaService: PartitaService,
@@ -37,6 +40,7 @@ export class HomeComponent implements OnInit {
   {
     this.renderer.addClass(document.body, 'lock-scroll');
     this.renderer.setStyle(document.body, 'overflow', 'hidden');
+   
   }
 
   ngOnInit(): void {
@@ -44,6 +48,7 @@ export class HomeComponent implements OnInit {
     console.log(this.immaginiCaselle);
     
     this.initPartita();
+    this.board.nativeElement.click();
   }
 
   casellaSbagliata(messaggio: string) {
@@ -57,12 +62,12 @@ export class HomeComponent implements OnInit {
   }
 
   pescaUnaTessera(): void {
-    debugger
+    
     this.partitaService.pescaUnaTessera(false);
   }
 
   passaIlTurno() : void {
-    debugger
+    
     this.nuovoTurnoBot()
   }
 

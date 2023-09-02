@@ -2,7 +2,7 @@
      class="card-wrapper banco">
   <section class="blocchi">
     <!-- centro-sinistra -->
-    <div class="blocco-carta centrale-sinistra"
+    <div cdkDropList cdkDropListSortingDisabled class="blocco-carta centrale-sinistra"
          [class.minore-spazio]="isLastCardVertical(parti.centraleSuperiore)"
          [class.maggiore-spazio-superiore]="isFirstCardVertical(parti.centraleSuperiore)">
       <div #cartaContainer
@@ -29,7 +29,7 @@
       </div>
     </div>
     <!-- verticale-sinistra -->
-    <div class="verticali sinistra"
+    <div cdkDropList cdkDropListSortingDisabled class="verticali sinistra"
          [class.maggiore-spazio-sinistra]="isLastCardVertical(parti.sinistra)">
       <div #cartaContainer
            *ngFor="let tessera of prendiParteArray(parti.sinistra);index as i"
@@ -54,7 +54,7 @@
       </div>
     </div>
     <!-- centro-centro -->
-    <div class="blocco-carta centrale"
+    <div cdkDropList cdkDropListSortingDisabled class="blocco-carta centrale"
          [class.leftHint]="isShownLeftHint&&prendiParteArray(parti.centro).length<limiteTessereCentrali"
          [class.rightHint]="isShownRightHint&&prendiParteArray(parti.centro).length<limiteTessereCentrali">
       <div #cartaContainer
@@ -66,7 +66,8 @@
            [cdkDragDisabled]="true"
            [cdkDragPreviewClass]="'carta'"
            [cdkDragData]="tessera"
-           [class.parti-uguali]="tessera.uguali">
+           [class.parti-uguali]="tessera.uguali"
+           >
 
         <div class="parte-sinistra"
              [ngClass]="tessera.invertita?'colore-secondario':null">
@@ -81,7 +82,7 @@
       </div>
     </div>
     <!-- verticale-destra -->
-    <div class="verticali destra"
+    <div cdkDropList cdkDropListSortingDisabled class="verticali destra"
          [class.maggiore-spazio-destra]="isLastCardVertical(parti.destra)">
       <div #cartaContainer
            *ngFor="let tessera of prendiParteArray(parti.destra);index as i"
@@ -106,7 +107,7 @@
       </div>
     </div>
     <!-- centro-destra -->
-    <div class="blocco-carta centrale-destra"
+    <div cdkDropList cdkDropListSortingDisabled class="blocco-carta centrale-destra"
          [class.minore-spazio-inferiore]="isFirstCardVertical(parti.centraleInferiore)">
       <div #cartaContainer
            *ngFor="let tessera of prendiParteArray(parti.centraleInferiore).reverse();index as i"

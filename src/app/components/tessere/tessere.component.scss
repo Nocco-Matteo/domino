@@ -6,6 +6,7 @@ $margine-tessere-utilities: 60px;
   align-items: center;
   height: 25vh;
   padding: 10px 0;
+
 }
 .carta {
   border-radius: 50%;
@@ -77,9 +78,11 @@ $margine-tessere-utilities: 60px;
 .bot {
   margin-top: -15vh;
   height: 25vh;
+  width: 100vw;
   .carta {
     cursor: default !important;
   }
+  
 }
 .colore-secondario {
   background-color: grey !important;
@@ -140,8 +143,17 @@ $margine-tessere-utilities: 60px;
   transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 .nonBot {
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  margin-right: 10px;
   .carta:hover {
     transform: scale(1.03) translateY(-10px);
     transition: transform 200ms ease-out;
+  }
+  .carta{
+    flex-direction: row!important;
+    height: auto;
+    margin-bottom: 10px;
   }
 }

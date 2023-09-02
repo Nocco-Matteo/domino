@@ -18,6 +18,7 @@ import { TessereComponent } from './components/tessere/tessere.component';
 import { UtilitiesComponent } from './components/utilities/utilities.component';
 import { BancoComponent } from './components/banco/banco.component';
 import { InizioModalComponent } from './components/modals/inizio-modal/inizio-modal.component';
+import { InizioComponent } from './components/pages/inizio/inizio.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,6 +30,7 @@ import { InizioModalComponent } from './components/modals/inizio-modal/inizio-mo
     LandscapeModalComponent,
     BancoComponent,
     InizioModalComponent,
+    InizioComponent,
   ],
   imports: [
     BrowserModule,

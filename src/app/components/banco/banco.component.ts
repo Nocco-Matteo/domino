@@ -149,4 +149,13 @@ export class BancoComponent implements OnInit, OnDestroy {
 
     this.emettiGrowl.emit('La tessera non può essere collegata');
   }
+
+  // gestioneDimensioneTessere(): boolean
+  // {
+  //   const parteSinistra = this.prendiParteArray(PARTI.sinistra).length;
+  //   const parteDestra = this.prendiParteArray(PARTI.destra).length;
+  //   return parteSinistra == 0 && parteDestra == 0;
+  // }
+
+
 }

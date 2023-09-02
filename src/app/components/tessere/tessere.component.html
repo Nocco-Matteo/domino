@@ -12,7 +12,7 @@
          [cdkDragDisabled]="isDragDisabled"
          [cdkDragPreviewClass]="'carta'"
          [cdkDragData]="tessera"
-         [ngClass]="i===0?' prima':''"
+         
          (cdkDragStarted)="checkHints($event)"
          (cdkDragEnded)="hideHints()">
 
