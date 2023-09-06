@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, 
 import { takeWhile, tap } from 'rxjs';
 import { AGGIUNTA_ANIMATION } from 'src/app/animations/animation';
 import { LIMITE_TESSERE_CENTRALI, PARTI } from 'src/app/configs/config';
-import { Immagine, Tessera } from 'src/app/models/models';
+import { ErroreModale, Immagine, Tessera } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
 
 @Component({
@@ -24,7 +24,7 @@ export class BancoComponent implements OnInit, OnDestroy {
   @Input() immaginiCaselle!: Immagine[];
 
   @Output() nuovoTurnoBot: EventEmitter<void> = new EventEmitter<void>();
-  @Output() emettiGrowl: EventEmitter<string> = new EventEmitter<string>();
+  @Output() emettiGrowl: EventEmitter<ErroreModale> = new EventEmitter<ErroreModale>();
 
   @ViewChild('CardWrapper', { static: true }) cardWrapper!: ElementRef;
 
@@ -81,6 +81,8 @@ export class BancoComponent implements OnInit, OnDestroy {
     return res;
   }
   cartaRilasciata(event: CdkDragDrop<any>): void {
+    console.log("carte utente: ", this.partitaService.tessereUtente);
+    
     const tessereUtente = event.previousContainer.data;
 
     const tesseraTrascinataIndex = event.previousIndex;
@@ -147,7 +149,7 @@ export class BancoComponent implements OnInit, OnDestroy {
     //non uguale
     console.log("errore: ", this.tessere, "---", cartaTrascinata, "---", isInEstremoSinistro, "---", isInEstremoDestro);
 
-    this.emettiGrowl.emit('La tessera non può essere collegata');
+    this.emettiGrowl.emit({messaggio: 'La tessera non può essere collegata', header: 'Operazione non corretta'});
   }
 
   // gestioneDimensioneTessere(): boolean

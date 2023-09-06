@@ -24,3 +24,8 @@ export interface Immagine{
 export interface IsTurnoBot{
   isTurnoBot: boolean;
 }
+
+export interface ErroreModale{
+  messaggio: string, 
+  header: string
+}

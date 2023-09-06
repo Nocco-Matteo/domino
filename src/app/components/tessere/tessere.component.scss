@@ -13,7 +13,6 @@ $margine-tessere-utilities: 60px;
   cursor: move;
   display: flex;
   align-items: center;
-  flex-direction: column;
   width: 120px;
   height: 100%;
   margin-left: -35px !important;
@@ -81,6 +80,8 @@ $margine-tessere-utilities: 60px;
   width: 100vw;
   .carta {
     cursor: default !important;
+    flex-direction: column;
+
   }
   
 }
@@ -152,7 +153,7 @@ $margine-tessere-utilities: 60px;
     transition: transform 200ms ease-out;
   }
   .carta{
-    flex-direction: row!important;
+    //flex-direction: row!important;
     height: auto;
     margin-bottom: 10px;
   }

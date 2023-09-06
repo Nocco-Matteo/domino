@@ -1,6 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef, Renderer2, ViewChild, ElementRef  } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
-import { IsTurnoBot, Tessera } from 'src/app/models/models';
+import { ErroreModale, IsTurnoBot, Tessera } from 'src/app/models/models';
 import { PartitaService } from 'src/app/services/partita.service';
 import { VittoriaModalComponent } from '../../modals/vittoria-modal/vittoria-modal.component';
 import { ErroreModalComponent } from '../../modals/errore-modal/errore-modal.component';
@@ -51,14 +51,14 @@ export class HomeComponent implements OnInit {
     this.board.nativeElement.click();
   }
 
-  casellaSbagliata(messaggio: string) {
+  casellaSbagliata(response: ErroreModale) {
     this.dialog.open(ErroreModalComponent, {
-      data: { messaggio: messaggio },
+      data: { messaggio: response.messaggio, header: response.header },
     });
   }
 
-  nuovoTurnoBot(): void {
-    this.partitaService.nuovoTurnoBot(this.turnoBot)
+  nuovoTurnoBot(checkUtentePassato?: boolean): void {
+    this.partitaService.nuovoTurnoBot(this.turnoBot, checkUtentePassato)
   }
 
   pescaUnaTessera(): void {
@@ -68,7 +68,7 @@ export class HomeComponent implements OnInit {
 
   passaIlTurno() : void {
     
-    this.nuovoTurnoBot()
+    this.nuovoTurnoBot(true)
   }
 
   private initPartita(): void {
