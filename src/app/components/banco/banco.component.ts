@@ -3,7 +3,7 @@ import { Component, ElementRef, EventEmitter, Input, OnDestroy, OnInit, Output, 
 import { takeWhile, tap } from 'rxjs';
 import { AGGIUNTA_ANIMATION } from 'src/app/animations/animation';
 import { LIMITE_TESSERE_CENTRALI, PARTI } from 'src/app/configs/config';
-import { ErroreModale, Immagine, Tessera } from 'src/app/models/models';
+import { ErroreModale, Immagine, Tessera } from 'src/app/models/domino.model';
 import { PartitaService } from 'src/app/services/partita.service';
 
 @Component({

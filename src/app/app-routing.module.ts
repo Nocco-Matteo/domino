@@ -1,14 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { InizioComponent } from './components/pages/inizio/inizio.component';
-import { HomeComponent } from './components/pages/home/home.component';
+import { DominoComponent } from './components/pages/domino/domino.component';
 import { authguard } from './guards/guard';
+import { ChatComponent } from './components/pages/chat/chat.component';
 
 const routes: Routes = [
-  {path: '', redirectTo: '/inizio', pathMatch: 'full' },
+  {path: '', redirectTo: '/chat', pathMatch: 'full' },
   {path: 'inizio', component: InizioComponent},
-  {path: 'home', component: HomeComponent, canActivate: [authguard] }
-
+  {path: 'domino', component: DominoComponent, canActivate: [authguard] },
+  {path: 'chat', component: ChatComponent}
 ];
 
 @NgModule({

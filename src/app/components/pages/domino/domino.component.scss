@@ -1,0 +1,41 @@
+:host{
+  height: 100vh;
+  max-height: 100vh;
+  max-width: 100vw;
+}
+
+.pulsanti{
+  height:5vh;
+}
+
+.board {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.banco {
+  width: 100%;
+  height: 60vh;
+  position: fixed;
+  top: calc(50% - (60vh / 2) ) 
+  
+}
+
+.utente {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  padding-bottom: 20px;
+}
+
+.bot{
+  position: fixed;
+  top: 0;
+}
+
+
+
+
+

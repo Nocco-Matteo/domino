@@ -3,7 +3,7 @@ import { ElementRef, Injectable, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { VittoriaModalComponent } from '../components/modals/vittoria-modal/vittoria-modal.component';
 import { BOT_NUMERO_TURNI, LIMITE_TESSERE_CENTRALI, LIMITE_TESSERE_VERTICALI, PARTI } from '../configs/config';
-import { Immagine, IsTurnoBot, Tessera } from '../models/models';
+import { Immagine, IsTurnoBot, Tessera } from '../models/domino.model';
 import { Observable, Subject } from 'rxjs';
 
 @Injectable({

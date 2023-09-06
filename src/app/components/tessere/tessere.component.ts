@@ -9,7 +9,7 @@ import {
   USCITA_ANIMATION,
 } from 'src/app/animations/animation';
 import { PARTI } from 'src/app/configs/config';
-import { Tessera } from 'src/app/models/models';
+import { Tessera } from 'src/app/models/domino.model';
 import { PartitaService } from 'src/app/services/partita.service';
 
 @Component({

@@ -2,7 +2,7 @@ import { Dialog } from '@angular/cdk/dialog';
 import { Component, EventEmitter, Input, Output, SimpleChanges } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { PESCA_PASSA_ANIMATION } from 'src/app/animations/animation';
-import { Tessera } from 'src/app/models/models';
+import { Tessera } from 'src/app/models/domino.model';
 import { PartitaService } from 'src/app/services/partita.service';
 import { ErroreModalComponent } from '../modals/errore-modal/errore-modal.component';
 

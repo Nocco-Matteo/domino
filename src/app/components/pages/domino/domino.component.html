@@ -1,0 +1,26 @@
+
+  <div #board class="board" cdkDropListGroup>
+    <div class="bot">
+      <app-tessere [immaginiCaselle]="immaginiCaselle" [isDragDisabled]="true" [isBot]="true"
+        [tessere]="tessereBot"></app-tessere>
+    </div>
+    <div #parteSinistraDiv class="banco">
+      <app-banco #bancoContent cdkDropList cdkDropListSortingDisabled [tessere]="tessereBanco"
+        [immaginiCaselle]="immaginiCaselle" [cdkDropListData]="tessereBanco" (emettiGrowl)="casellaSbagliata($event)"
+        (nuovoTurnoBot)="nuovoTurnoBot()" (cdkDropListDropped)="bancoContent.cartaRilasciata($event)">
+      </app-banco>
+    </div>
+    <div class="utente">
+      <app-tessere cdkDropList cdkDropListSortingDisabled [tessere]="tessereUtente" [immaginiCaselle]="immaginiCaselle"
+        [cdkDropListData]="tessereUtente" [isDragDisabled]="turnoBot.isTurnoBot">
+      </app-tessere>
+    </div>
+  </div>
+
+<app-utilities [tessere]="tessere"
+               [isTurnoBot]="turnoBot.isTurnoBot"
+               (pesca)="pescaUnaTessera()"
+               (passa)="passaIlTurno()">
+</app-utilities>
+
+<!-- <app-game></app-game> -->

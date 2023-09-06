@@ -10,19 +10,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/pages/home/home.component';
+import { BancoComponent } from './components/banco/banco.component';
 import { ErroreModalComponent } from './components/modals/errore-modal/errore-modal.component';
+import { InizioModalComponent } from './components/modals/inizio-modal/inizio-modal.component';
 import { LandscapeModalComponent } from './components/modals/landscape-modal/landscape-modal.component';
 import { VittoriaModalComponent } from './components/modals/vittoria-modal/vittoria-modal.component';
+import { ChatComponent } from './components/pages/chat/chat.component';
+import { DominoComponent } from './components/pages/domino/domino.component';
+import { InizioComponent } from './components/pages/inizio/inizio.component';
 import { TessereComponent } from './components/tessere/tessere.component';
 import { UtilitiesComponent } from './components/utilities/utilities.component';
-import { BancoComponent } from './components/banco/banco.component';
-import { InizioModalComponent } from './components/modals/inizio-modal/inizio-modal.component';
-import { InizioComponent } from './components/pages/inizio/inizio.component';
+import { HomeComponent } from './components/pages/home/home.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    DominoComponent,
     TessereComponent,
     UtilitiesComponent,
     VittoriaModalComponent,
@@ -31,6 +34,9 @@ import { InizioComponent } from './components/pages/inizio/inizio.component';
     BancoComponent,
     InizioModalComponent,
     InizioComponent,
+    ChatComponent,
+    HomeComponent,
+    
   ],
   imports: [
     BrowserModule,
@@ -41,7 +47,9 @@ import { InizioComponent } from './components/pages/inizio/inizio.component';
     MatCardModule,
     MatDialogModule,
     MatButtonModule,
-    NgOptimizedImage
+    NgOptimizedImage,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
