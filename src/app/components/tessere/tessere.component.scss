@@ -39,20 +39,12 @@ $margine-tessere-utilities: 60px;
     height: 40px !important;
   }
   .parte-sinistra {
-    border-top-right-radius: 10% !important;
-    border-bottom-left-radius: 0 !important;
-    img {
-      border-top-right-radius: 10% !important;
-      border-bottom-left-radius: 0 !important;
-    }
+    border: 1px solid #ffebc6;
+    img {}
   }
   .parte-destra {
-    border-top-right-radius: 0 !important;
-    border-bottom-left-radius: 10% !important;
-    img {
-      border-top-right-radius: 0 !important;
-      border-bottom-left-radius: 10% !important;
-    }
+    border: 1px solid #ffebc6;
+    img {}
   }
 }
 
@@ -91,8 +83,11 @@ $margine-tessere-utilities: 60px;
 .retro-carta {
   height: 100%;
   width: 100%;
-  background-color: #ebd77f;
-  border: 1px solid black;
+  background-image: url(/assets/imgs/RETRO2.png);
+  background-size: cover;      
+  background-repeat: no-repeat; 
+  background-position: center;  
+  border: 1px solid #ffebc6;
   border-radius: 10%;
 }
 
@@ -112,20 +107,15 @@ $margine-tessere-utilities: 60px;
   }
 }
 .parte-sinistra {
-  border-top-left-radius: 10%;
-  border-top-right-radius: 10%;
-  img {
-    border-top-left-radius: 10%;
-    border-top-right-radius: 10%;
-  }
+  //border-top-right-radius: 10% !important;
+  border: 1px solid #ffebc6;
+  img {}
 }
 .parte-destra {
-  border-bottom-left-radius: 10%;
-  border-bottom-right-radius: 10%;
-  img {
-    border-bottom-left-radius: 10%;
-    border-bottom-right-radius: 10%;
-  }
+  //border-top-right-radius: 0 !important;
+  //border-bottom-left-radius: 10% !important;
+  border: 1px solid #ffebc6;
+  img {}
 }
 //view elemento mentre viene spostato
 .cdk-drag-preview{

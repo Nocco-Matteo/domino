@@ -6,6 +6,30 @@
   justify-content: flex-end;
 }
 
+.message-left, .message-right{
+  margin-bottom: 10px;
+}
+
+.character {
+  justify-content: flex-start;
+  background-color: #ffebc6;
+}
+
+.user {
+  justify-content: end;
+  background-color: #008c95;
+}
+
+.card-body {
+  padding: 15px;  /* Adjust the padding as per your needs */
+}
+
+.card-text {
+  line-height: 1.5;  /* Adjust line height to ensure text doesn't overlap */
+  margin: 0;         /* Remove any default margins */
+  white-space: pre-line; /* This will ensure that line breaks in the text are respected */
+}
+
 @keyframes zoomIn {
   from {
     opacity: 0;
@@ -104,13 +128,7 @@
     background-color: #f4f4f4;
   }
 
-.character {
-}
 
-.user {
-  display: flex;
-  justify-content: end;
-}
 
 .patternScuro {
   background-color: #008c95;

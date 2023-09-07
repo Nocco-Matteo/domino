@@ -9,3 +9,11 @@
     box-shadow: none !important;
   }
 }
+
+::ng-deep .patternScuro {
+  background-color: #008c95!important;
+}
+
+::ng-deep .patternChiaro {
+  background-color: #ffebc6!important;
+}

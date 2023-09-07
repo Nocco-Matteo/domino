@@ -1,13 +1,31 @@
-.button-container{
-    width: 100%;
-    height: 100%;
+
+.btn-extra-large {
+    font-size: 4rem;  /* Ad esempio, puoi aumentare la dimensione del font */
+    padding: 2rem 4rem;  /* E aggiungere più padding */
+  }
+
+
+
+  .logo {
+    height: 40%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color:#62a383!important;
-    overflow: hidden;
-}
-.btn-extra-large {
-    font-size: 2rem;  /* Ad esempio, puoi aumentare la dimensione del font */
-    padding: 1rem 2rem;  /* E aggiungere più padding */
+
+    img{
+        margin-top: 5%;
+        max-height: 100%;
+    }
+  }
+
+  .button-container{
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .my-bg {
+    height: 100vh;
+  
   }

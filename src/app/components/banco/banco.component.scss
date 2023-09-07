@@ -33,20 +33,12 @@
   }
 
   .parte-sinistra {
-    border-bottom-left-radius: 10%;
-    border-top-right-radius: 0 !important;
-    img {
-      border-bottom-left-radius: 10%;
-      border-top-right-radius: 0 !important;
-    }
+    border: 1px solid #ffebc6;
+    img {}
   }
   .parte-destra {
-    border-bottom-left-radius: 0 !important;
-    border-top-right-radius: 10%;
-    img {
-      border-bottom-left-radius: 0 !important;
-      border-top-right-radius: 10%;
-    }
+    border: 1px solid #ffebc6;
+    img {}
   }
 }
 .blocchi {
@@ -170,20 +162,12 @@
     height: 40px !important;
   }
   .parte-sinistra {
-    border-top-right-radius: 10% !important;
-    border-bottom-left-radius: 0 !important;
-    img {
-      border-top-right-radius: 10% !important;
-      border-bottom-left-radius: 0 !important;
-    }
+    border: 1px solid #ffebc6;
+    img {}
   }
   .parte-destra {
-    border-top-right-radius: 0 !important;
-    border-bottom-left-radius: 10% !important;
-    img {
-      border-top-right-radius: 0 !important;
-      border-bottom-left-radius: 10% !important;
-    }
+    border: 1px solid #ffebc6;
+    img {}
   }
 }
 
@@ -203,20 +187,12 @@
   }
 }
 .parte-sinistra {
-  border-top-left-radius: 10%;
-  border-top-right-radius: 10%;
-  img {
-    border-top-left-radius: 10%;
-    border-top-right-radius: 10%;
-  }
+  border: 1px solid #ffebc6;
+  img {}
 }
 .parte-destra {
-  border-bottom-left-radius: 10%;
-  border-bottom-right-radius: 10%;
-  img {
-    border-bottom-left-radius: 10%;
-    border-bottom-right-radius: 10%;
-  }
+  border: 1px solid #ffebc6;
+  img {}
 }
 
 // .carta-ingrandita{

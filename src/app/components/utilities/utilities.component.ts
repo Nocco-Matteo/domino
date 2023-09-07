@@ -14,6 +14,7 @@ import { ErroreModalComponent } from '../modals/errore-modal/errore-modal.compon
 })
 export class UtilitiesComponent {
   primaPescata: boolean = true;
+  isBotTurn: boolean = false; 
   testoBottone: string = 'Pesca'
 
   @Input() tessere!: Tessera[];
@@ -32,6 +33,7 @@ export class UtilitiesComponent {
     if(changes['isTurnoBot']?.currentValue){
         this.primaPescata = true
         this.testoBottone = 'Pesca'
+        this.isBotTurn = !this.isBotTurn;
     }
 
     if (!!changes['isTurnoBot']?.previousValue) {
@@ -39,6 +41,7 @@ export class UtilitiesComponent {
       if (this.tessere.length === 0) {
         this.primaPescata = false
         this.testoBottone = 'Passa'
+        //this.isBotTurn = !this.isBotTurn;
       }
     }
   }

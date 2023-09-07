@@ -47,6 +47,6 @@ export class InizioComponent implements OnInit {
     }
 
     this.partitaService.redirectInizio = true;
-    this.router.navigate(['/home']);
+    this.router.navigate(['/domino']);
   }
 }

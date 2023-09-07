@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Cards } from 'src/app/configs/chat.config';
 import { Messaggio } from 'src/app/models/chat.model';
@@ -13,7 +13,7 @@ export class ChatComponent {
   readonly cards = Cards;
   form: FormGroup;
   nome: string | null = null;
-  nomeInserito: string | null = null;
+  nomeInserito: string = '';
   isLandscape!: boolean;
   btnStart: boolean = false;
   chatMessages: Array<Messaggio> = [];
@@ -22,11 +22,11 @@ export class ChatComponent {
 
   constructor(
     private readonly router: Router,
-    private readonly formBuilder: FormBuilder
+    private readonly fb: FormBuilder
   ) {
-    this.form = this.formBuilder.group({
-      messaggio: ['']
-    })
+    this.form = this.fb.group({
+      messaggio: ['', Validators.required]
+    });
   }
 
   ngOnInit(): void {
@@ -34,20 +34,27 @@ export class ChatComponent {
   }
 
   setName(): void {
-    this.nomeInserito = this.nome;
-    this.chatMessages.push({ text: `Il mio nome è ${this.nome}.`, sender: 'user' });
-    this.chatMessages.push({ text: `Benvenuto ${this.nome}, vuoi giocare con me? Seleziona qui sotto il gioco!!`, image: '/assets/imgs/chat/personaggio.png', sender: 'character' });
-    this.showCards = true;
+    this.nomeInserito = this.form.get('messaggio')?.value;
+
+    if(this.nomeInserito) {
+      this.chatMessages.push({ text: `Il mio nome è ${this.nomeInserito}.`, sender: 'user' });
+      this.chatMessages.push({
+        text: `Benvenuto ${this.nomeInserito}, vuoi giocare con me?  \n Seleziona qui sotto il gioco!!`,
+        image: '/assets/imgs/chat/personaggio.png',
+        sender: 'character'
+      });
+      this.showCards = true;
+      this.form.get('messaggio')?.setValue('');
+
+    }
+
   }
+  
 
   startChat(): void {
     this.chatMessages.push({ text: 'Ciao sono Teddy la volpe! Come ti chiami?', image: '/assets/imgs/chat/personaggio.png', sender: 'character' });
   }
 
-
-  salutaUtente() {
-    this.nome = this.nomeInserito;
-  }
 
   naviga(link: string) {
     switch (link) {

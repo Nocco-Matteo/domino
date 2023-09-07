@@ -30,7 +30,6 @@ $altezza-blocchi-turni: 40px;
 
   .turno-bot, .turno-utente{
     height: $altezza-blocchi-turni;
-    background-color: gray;
     white-space: nowrap;
     font-size: x-small;
     display: flex;
@@ -44,6 +43,15 @@ $altezza-blocchi-turni: 40px;
 
   // background-color: #a67c52;
 }
+
+.turno-on {
+  background-color: #4CAF50; 
+}
+
+.turno-off {
+  background-color: #A5D6A7; 
+}
+
 
 
 
